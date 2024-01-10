@@ -1,0 +1,999 @@
+[
+  {
+    "ExternalReferenceNumber": "",
+    "EventGroupId": 12202,
+    "Name": "Lunch concert",
+    "SubTitle": "",
+    "Description": "",
+    "ImageCacheKey": 1659434957,
+    "EventImagePath": "https://cdn.tix.uk/tix/EventImages/Event_12202.jpg",
+    "FeaturedImagePath": "https://cdn.tix.uk/tix/EventImages/Feature_12202.jpg",
+    "PosterImagePath": "https://cdn.tix.uk/tix/EventImages/Poster_12202.jpg",
+    "ExternalUrl": "",
+    "IsFilm": false,
+    "PurchaseUrls": [
+      {
+        "LanguageName": "English",
+        "Culture": "en-GB",
+        "TwoLetterCulture": "en",
+        "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12202/"
+      }
+    ],
+    "Translations": [],
+    "Dates": [
+      {
+        "EventId": 7910,
+        "DefaultEventGroupId": 12202,
+        "Name": "Lunch concert - VIP",
+        "StartDate": "2022-08-17T12:00:00+01:00",
+        "StartDateUTCUnix": 1660734000,
+        "EndDate": "2022-08-17T22:00:00+01:00",
+        "EndDateUTCUnix": 1660770000,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-08-02T10:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659430800,
+        "OnlineSaleEnd": "2022-08-17T12:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1660734000,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Other",
+        "CategoryTranslations": {
+          "Other": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Other",
+              "TixDefault": true
+            }
+          ]
+        },
+        "Tags": "Lunch",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12202/7910/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 50.0,
+        "MaxPrice": 75.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 50.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 75.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7911,
+        "DefaultEventGroupId": 12202,
+        "Name": "Lunch concert",
+        "StartDate": "2022-08-24T12:00:00+01:00",
+        "StartDateUTCUnix": 1661338800,
+        "EndDate": "2022-08-24T22:00:00+01:00",
+        "EndDateUTCUnix": 1661374800,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-08-02T10:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659430800,
+        "OnlineSaleEnd": "2022-08-24T12:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1661338800,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Other",
+        "CategoryTranslations": {
+          "Other": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Other",
+              "TixDefault": true
+            }
+          ]
+        },
+        "Tags": "Lunch",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12202/7911/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 50.0,
+        "MaxPrice": 75.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 50.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 75.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7912,
+        "DefaultEventGroupId": 12202,
+        "Name": "Lunch concert",
+        "StartDate": "2022-08-31T12:00:00+01:00",
+        "StartDateUTCUnix": 1661943600,
+        "EndDate": "2022-08-31T22:00:00+01:00",
+        "EndDateUTCUnix": 1661979600,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-08-02T10:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659430800,
+        "OnlineSaleEnd": "2022-08-31T12:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1661943600,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Other",
+        "CategoryTranslations": {
+          "Other": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Other",
+              "TixDefault": true
+            }
+          ]
+        },
+        "Tags": "Lunch",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12202/7912/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 50.0,
+        "MaxPrice": 75.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 50.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 75.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      }
+    ]
+  },
+  {
+    "ExternalReferenceNumber": "",
+    "EventGroupId": 12201,
+    "Name": "Sunday recital",
+    "SubTitle": "",
+    "Description": "",
+    "ImageCacheKey": 1659078901,
+    "EventImagePath": "https://cdn.tix.uk/tix/EventImages/Event_12201.jpg",
+    "FeaturedImagePath": "https://cdn.tix.uk/tix/EventImages/Feature_12201.jpg",
+    "PosterImagePath": "https://cdn.tix.uk/tix/EventImages/Poster_12201.jpg",
+    "ExternalUrl": "",
+    "IsFilm": false,
+    "PurchaseUrls": [
+      {
+        "LanguageName": "English",
+        "Culture": "en-GB",
+        "TwoLetterCulture": "en",
+        "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12201/"
+      }
+    ],
+    "Translations": [],
+    "Dates": [
+      {
+        "EventId": 7904,
+        "DefaultEventGroupId": 12201,
+        "Name": "Sunday recital",
+        "StartDate": "2022-08-28T10:00:00+01:00",
+        "StartDateUTCUnix": 1661677200,
+        "EndDate": "2022-08-28T12:00:00+01:00",
+        "EndDateUTCUnix": 1661684400,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-08-04T12:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659610800,
+        "OnlineSaleEnd": "2022-08-28T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1661713200,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "120 min",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Recital",
+        "CategoryTranslations": {
+          "Recital": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Recital",
+              "TixDefault": false
+            }
+          ]
+        },
+        "Tags": "Recital",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12201/7904/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 80.0,
+        "MaxPrice": 205.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 105.0
+              },
+              {
+                "PriceZone": "D",
+                "PriceZoneID": 5,
+                "Price": 80.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": 20,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": 20,
+            "QuantityRule": "0,1-2",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 205.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7905,
+        "DefaultEventGroupId": 12201,
+        "Name": "Sunday recital",
+        "StartDate": "2022-09-04T10:00:00+01:00",
+        "StartDateUTCUnix": 1662282000,
+        "EndDate": "2022-09-04T12:00:00+01:00",
+        "EndDateUTCUnix": 1662289200,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-07-28T12:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659006000,
+        "OnlineSaleEnd": "2022-09-04T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1662318000,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "120 min",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Recital",
+        "CategoryTranslations": {
+          "Recital": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Recital",
+              "TixDefault": false
+            }
+          ]
+        },
+        "Tags": "Recital",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12201/7905/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 80.0,
+        "MaxPrice": 205.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 105.0
+              },
+              {
+                "PriceZone": "D",
+                "PriceZoneID": 5,
+                "Price": 80.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": 20,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": 20,
+            "QuantityRule": "0,1-2",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 205.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7903,
+        "DefaultEventGroupId": 12201,
+        "Name": "Sunday recital - VIP",
+        "StartDate": "2022-09-11T10:00:00+01:00",
+        "StartDateUTCUnix": 1662886800,
+        "EndDate": "2022-09-11T12:00:00+01:00",
+        "EndDateUTCUnix": 1662894000,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-07-28T12:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659006000,
+        "OnlineSaleEnd": "2022-09-11T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1662922800,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "120 min",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Recital",
+        "CategoryTranslations": {
+          "Recital": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Recital",
+              "TixDefault": false
+            }
+          ]
+        },
+        "Tags": "Recital",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12201/7903/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 80.0,
+        "MaxPrice": 205.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 105.0
+              },
+              {
+                "PriceZone": "D",
+                "PriceZoneID": 5,
+                "Price": 80.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": 20,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": 20,
+            "QuantityRule": "0,1-2",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 205.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7906,
+        "DefaultEventGroupId": 12201,
+        "Name": "Sunday recital",
+        "StartDate": "2022-09-18T10:00:00+01:00",
+        "StartDateUTCUnix": 1663491600,
+        "EndDate": "2022-09-18T12:00:00+01:00",
+        "EndDateUTCUnix": 1663498800,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-07-28T12:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659006000,
+        "OnlineSaleEnd": "2022-09-18T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1663527600,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "120 min",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Recital",
+        "CategoryTranslations": {
+          "Recital": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Recital",
+              "TixDefault": false
+            }
+          ]
+        },
+        "Tags": "Recital",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12201/7906/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 80.0,
+        "MaxPrice": 205.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 105.0
+              },
+              {
+                "PriceZone": "D",
+                "PriceZoneID": 5,
+                "Price": 80.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": 20,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": 20,
+            "QuantityRule": "0,1-2",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 205.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7907,
+        "DefaultEventGroupId": 12201,
+        "Name": "Sunday recital",
+        "StartDate": "2022-09-25T10:00:00+01:00",
+        "StartDateUTCUnix": 1664096400,
+        "EndDate": "2022-09-25T12:00:00+01:00",
+        "EndDateUTCUnix": 1664103600,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-07-28T12:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1659006000,
+        "OnlineSaleEnd": "2022-09-25T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1664132400,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "120 min",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Recital",
+        "CategoryTranslations": {
+          "Recital": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Recital",
+              "TixDefault": false
+            }
+          ]
+        },
+        "Tags": "Recital",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12201/7907/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 80.0,
+        "MaxPrice": 205.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 105.0
+              },
+              {
+                "PriceZone": "D",
+                "PriceZoneID": 5,
+                "Price": 80.0
+              }
+            ]
+          },
+          {
+            "TicketType": "VIP",
+            "Quota": 20,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": 20,
+            "QuantityRule": "0,1-2",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 205.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      }
+    ]
+  },
+  {
+    "ExternalReferenceNumber": "",
+    "EventGroupId": 12041,
+    "Name": "Test",
+    "SubTitle": "Test",
+    "Description": "<p>Test</p>",
+    "ImageCacheKey": 1640252322,
+    "EventImagePath": "https://cdn.tix.uk/tix/EventImages/Event_12041.jpg",
+    "FeaturedImagePath": "https://cdn.tix.uk/tix/EventImages/Feature_12041.jpg",
+    "PosterImagePath": "https://cdn.tix.uk/tix/EventImages/Poster_12041.jpg",
+    "ExternalUrl": "",
+    "IsFilm": false,
+    "PurchaseUrls": [
+      {
+        "LanguageName": "English",
+        "Culture": "en-GB",
+        "TwoLetterCulture": "en",
+        "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12041/"
+      }
+    ],
+    "Translations": [],
+    "Dates": [
+      {
+        "EventId": 6773,
+        "DefaultEventGroupId": 12041,
+        "Name": "Test Event - Event Test",
+        "StartDate": "2022-09-01T18:30:00+01:00",
+        "StartDateUTCUnix": 1662053400,
+        "EndDate": "2022-09-01T19:30:00+01:00",
+        "EndDateUTCUnix": 1662057000,
+        "WaitingList": true,
+        "OnlineSaleStart": "2021-12-23T09:15:00+00:00",
+        "OnlineSaleStartUTCUnix": 1640250900,
+        "OnlineSaleEnd": "2022-09-01T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1662058800,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "60",
+        "SaleStatus": 0,
+        "SaleStatusText": "NoStatus",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Recital",
+        "CategoryTranslations": {
+          "Recital": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Recital",
+              "TixDefault": false
+            }
+          ]
+        },
+        "Tags": "Recital",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12041/6773/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 70.0,
+        "MaxPrice": 70.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 70.0
+              }
+            ]
+          },
+          {
+            "TicketType": "Wheelchair",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "H",
+                "PriceZoneID": 9,
+                "Price": 70.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      },
+      {
+        "EventId": 7848,
+        "DefaultEventGroupId": 12041,
+        "Name": "Test - New Hall",
+        "StartDate": "2022-09-08T20:00:00+01:00",
+        "StartDateUTCUnix": 1662663600,
+        "EndDate": "2022-09-08T22:00:00+01:00",
+        "EndDateUTCUnix": 1662670800,
+        "WaitingList": false,
+        "OnlineSaleStart": "2022-07-12T12:00:00+01:00",
+        "OnlineSaleStartUTCUnix": 1657623600,
+        "OnlineSaleEnd": "2022-09-08T20:00:00+01:00",
+        "OnlineSaleEndUTCUnix": 1662663600,
+        "Venue": "Bechstein Hall",
+        "Hall": "Recital Hall 2022",
+        "Promoter": "Bechstein Hall",
+        "SoldOut": false,
+        "Duration": "",
+        "SaleStatus": 3,
+        "SaleStatusText": "Cancelled",
+        "Capacity": -1,
+        "Remaining": -1,
+        "Categories": "Other",
+        "CategoryTranslations": {
+          "Other": [
+            {
+              "LanguageName": "",
+              "Culture": "",
+              "TwoLetterCulture": "",
+              "Name": "Other",
+              "TixDefault": true
+            }
+          ]
+        },
+        "Tags": "",
+        "Translations": [],
+        "PurchaseUrls": [
+          {
+            "LanguageName": "English",
+            "Culture": "en-GB",
+            "TwoLetterCulture": "en",
+            "Link": "https://tix.bechsteinhall.func.agency/en/buyingflow/tickets/12041/7848/"
+          }
+        ],
+        "ProductPurchaseUrls": [],
+        "Products": [],
+        "MinPrice": 70.0,
+        "MaxPrice": 70.0,
+        "Prices": [
+          {
+            "TicketType": "Standard",
+            "Quota": null,
+            "Sold": 0,
+            "Reserved": 0,
+            "Remaining": null,
+            "QuantityRule": "",
+            "ActiveFrom": null,
+            "ActiveFromUTCUnix": 0,
+            "ActiveTo": null,
+            "ActiveToUTCUnix": 0,
+            "Translations": [],
+            "Prices": [
+              {
+                "PriceZone": "GA",
+                "PriceZoneID": 1,
+                "Price": 70.0
+              }
+            ]
+          }
+        ],
+        "Benefits": []
+      }
+    ]
+  }
+]

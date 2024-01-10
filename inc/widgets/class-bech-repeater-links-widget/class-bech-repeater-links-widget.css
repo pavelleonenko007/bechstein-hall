@@ -1,0 +1,9 @@
+.bech-repeater-widget-fields {
+    margin-top: 1em;
+    padding: 0px 1em;
+    border: 1px solid #c3c4c7;
+}
+
+.bech-repeater-widget-fields:last-child {
+    margin-bottom: 1em;
+}
