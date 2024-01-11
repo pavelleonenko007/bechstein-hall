@@ -1488,3 +1488,35 @@ function bech_default_share_image( $image ) {
 
 // fix big image upload
 add_filter( 'big_image_size_threshold', '__return_false' );
+
+
+/**
+ * Convert phone number string to phone link
+ *
+ * @param string $phone_number Phone number string.
+ * @return string Phone number link
+ */
+function bech_format_phone_to_link( string $phone_number ): string {
+	if ( empty( $phone_number ) ) {
+		return '';
+	}
+
+	return 'tel:' . preg_replace( '/[^0-9+]/', '', $phone_number );
+}
+
+/**
+ * Convert email string to email link
+ *
+ * @param string $email Email string.
+ * @param string $subject Email Subject.
+ * @return string Email link
+ */
+function bech_format_email_link( string $email, string $subject = '' ): string {
+	$email_link = "mailto:{$email}";
+
+	if ( ! empty( $subject ) ) {
+		$email_link .= "?subject={$subject}";
+	}
+
+	return esc_url( $email_link );
+}
