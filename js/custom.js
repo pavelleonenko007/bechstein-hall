@@ -2419,8 +2419,10 @@ const initTixSessions = () => {
   let tixConntectedInterval = null;
   let counter = 0;
   const getUserData = (event) => {
-    isTixConnected = true;
+    if (event.origin !== 'https://tickets.new.bechsteinhall.com') return;
+    
     window.tixCart.setData(event.data);
+    isTixConnected = true;
     if (event.data.user !== null) {
       initBenefitsForUser(event.data.user);
     }
