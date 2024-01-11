@@ -58,48 +58,46 @@
 						</div>
 						<div class="mobile-filter-popup__body">
 							<div class="filters-div">
-							<input class="visually-hidden" name="from" value="<?php echo ! empty( $_GET['from'] ) ? $_GET['from'] : ''; ?>" />
-							<input class="visually-hidden" name="to" value="
-							<?php
-							if ( ! empty( $_GET['to'] ) ) {
-								echo $_GET['to'];
-							}
-							?>
-							" />
+									<?php
+									$from_date = isset( $_GET['from'] ) ? sanitize_text_field( wp_unslash( $_GET['from'] ) ) : '';
+									$to_date   = isset( $_GET['to'] ) ? sanitize_text_field( wp_unslash( $_GET['to'] ) ) : '';
+									?>
+								<input class="visually-hidden" name="from" value="<?php echo esc_attr( $from_date ); ?>" />
+								<input class="visually-hidden" name="to" value="<?php echo esc_attr( $to_date ); ?>" />
 
-							<div class="filters-top-div">
-								<div class="p-20-30">Time to go</div>
-								<div id="calendar-widget"></div>
-								<!-- <a href="#" class="calendar-btn w-inline-block">
-								<img src="https://uploads-ssl.webflow.com/62bc3fe7d9cc6134bf261592/62bc3fe7d9cc6162b22615c0_calendar.svg" loading="lazy" alt="" class="img-calendar" />
-	
-								<button class="calendar-btn__reset" data-type="reset">✕</button>
-								<div class="calendar-btn__close">Close</div>
-								<div id="filter-calendar" class="filter-calendar"></div>
-								</a> -->
-							</div>
-							<div class="filters-bottom-div">
-								<label class="w-radio cbx-mom">
-								<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
-								<input type="radio" id="today" name="time" value="today" style="opacity:0;position:absolute;z-index:-1" />
-								<span class="filter-cbx w-form-label" for="today">today</span>
-								</label>
-								<label class="w-radio cbx-mom">
-								<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
-								<input type="radio" id="tomorrow" name="time" value="tomorrow" style="opacity:0;position:absolute;z-index:-1" />
-								<span class="filter-cbx w-form-label" for="tomorrow">tomorrow</span>
-								</label>
-								<label class="w-radio cbx-mom">
-								<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
-								<input type="radio" id="weekend" name="time" value="weekend" style="opacity:0;position:absolute;z-index:-1" />
-								<span class="filter-cbx w-form-label" for="weekend">this weekend</span>
-								</label>
-								<label class="w-radio cbx-mom">
-								<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
-								<input type="radio" id="next-week" name="time" value="next-week" style="opacity:0;position:absolute;z-index:-1" />
-								<span class="filter-cbx w-form-label" for="next-week">next week</span>
-								</label>
-							</div>
+								<div class="filters-top-div">
+									<div class="p-20-30">Time to go</div>
+									<div id="calendar-widget"></div>
+									<!-- <a href="#" class="calendar-btn w-inline-block">
+									<img src="https://uploads-ssl.webflow.com/62bc3fe7d9cc6134bf261592/62bc3fe7d9cc6162b22615c0_calendar.svg" loading="lazy" alt="" class="img-calendar" />
+		
+									<button class="calendar-btn__reset" data-type="reset">✕</button>
+									<div class="calendar-btn__close">Close</div>
+									<div id="filter-calendar" class="filter-calendar"></div>
+									</a> -->
+								</div>
+								<div class="filters-bottom-div">
+									<label class="w-radio cbx-mom">
+										<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
+										<input type="radio" id="today" name="time" value="today" style="opacity:0;position:absolute;z-index:-1" />
+										<span class="filter-cbx w-form-label" for="today">today</span>
+									</label>
+									<label class="w-radio cbx-mom">
+										<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
+										<input type="radio" id="tomorrow" name="time" value="tomorrow" style="opacity:0;position:absolute;z-index:-1" />
+										<span class="filter-cbx w-form-label" for="tomorrow">tomorrow</span>
+									</label>
+									<label class="w-radio cbx-mom">
+										<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
+										<input type="radio" id="weekend" name="time" value="weekend" style="opacity:0;position:absolute;z-index:-1" />
+										<span class="filter-cbx w-form-label" for="weekend">this weekend</span>
+									</label>
+									<label class="w-radio cbx-mom">
+										<div class="w-radio-input w-radio-input--inputType-custom cbx"></div>
+										<input type="radio" id="next-week" name="time" value="next-week" style="opacity:0;position:absolute;z-index:-1" />
+										<span class="filter-cbx w-form-label" for="next-week">next week</span>
+									</label>
+								</div>
 							</div>
 						</div>
 						<a bgline="1" class="booktickets-btn mobile-filter-popup__button">

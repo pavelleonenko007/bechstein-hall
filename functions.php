@@ -387,16 +387,6 @@ function set_custom_templates($original_template)
     }
 }
 
-add_filter('search_template', 'change_search_template');
-function change_search_template($template)
-{
-    if ($_GET['post_type'] != '' && $_GET['post_type'] != 'post' && $_GET['post_type'] != 'page') {
-        return locate_template('archive-' . $_GET['post_type'] . '.php');
-    } else {
-        return locate_template('search.php');
-    }
-}
-
 function wp_admin_bar_options()
 {
     global $wp_admin_bar;
