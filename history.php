@@ -127,7 +127,7 @@ Template name: History
 						<div class="his-container lft">
 							<div class="his-left lft"></div>
 							<div class="his-right m691 m3">
-								<p data-w-id="908febcb-ccf3-672f-4710-42fec68ccde8" class="p-20-35">Sporting elegant mahogany panelling and leaded glass windows, the showrooms were described as ‘one of the sights of fashionable London’, with ‘few rivals as regards their general attractiveness’. The display space took up the ground floor and the basement, the former with rooms on either side of the hallway. In 1894 Brinsmead added a 130-seat recital hall at the back of the lower floor, boasting windows on two sides, mirrored columns and tiled walls.<br><br>Sporting elegant mahogany panelling and leaded glass windows, the showrooms were described as ‘one of the sights of fashionable London’, with ‘few rivals as regards their general attractiveness’. The display space took up the ground floor and the basement, the former with rooms on either side of the hallway. In 1894 Brinsmead added a 130-seat recital hall at the back of the lower floor, boasting windows on two sides, mirrored columns and tiled walls.<br></p>
+								<p data-w-id="908febcb-ccf3-672f-4710-42fec68ccde8" class="p-20-35">Sporting elegant mahogany panelling and leaded glass windows, the showrooms were described as ‘one of the sights of fashionable London’, with ‘few rivals as regards their general attractiveness’. The display space took up the ground floor and the basement, the former with rooms on either side of the hallway. In 1894 Brinsmead added a 130-seat recital hall at the back of the lower floor, boasting windows on two sides, mirrored columns and tiled walls.<br></p>
 							</div>
 						</div>
 					</section>
