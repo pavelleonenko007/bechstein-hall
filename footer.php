@@ -215,7 +215,7 @@ defined( 'ABSPATH' ) || exit; ?>
 			<div class="footer-col _3">
 				<div class="foo-bottomer">
 					<div>© <?php echo esc_html( gmdate( 'Y' ) ); ?>, <?php echo esc_html( get_field( 'copyright', 'option' ) ); ?></div>
-					<a href="https://func.agency" target="_blank" rel="nofollow" class="funk-link">Website made by Func. ↗</a>
+					<a href="https://func.agency" target="_blank" rel="nofollow" class="funk-link">Website made by Func. </a>
 				</div>
 			</div>
 		</div>
