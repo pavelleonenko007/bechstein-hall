@@ -1210,6 +1210,15 @@ p strong {
 	.form-filter-press .filter-chek {
 		margin-right: 0rem;
 	}
+
+	.left-event-col.left-event .choisetckets-btn {
+		filter: invert(0);
+	}
+
+	.choisetckets-btn.min::after,
+	.choisetckets-btn.min::before {
+		background: url('https://uploads-ssl.webflow.com/624c5364ec3046603b0a108f/62f0c4a1ac1aca1efd350e43_62a09552973cac62813658dd_Subtract.svg');
+	}
 }
 
 @media only screen and (orientation: landscape) and (max-height: 495px) {
