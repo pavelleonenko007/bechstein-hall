@@ -40,7 +40,7 @@ $sale_status = get_post_meta( $post->ID, '_bechtix_sale_status', true );
 		<?php
 		if ( '2' === $sale_status || '3' === $sale_status ) :
 			?>
-		<div class="cms-li_sold-out-banner"><?php echo esc_html( bech_get_sale_status_string_value( $sale_status ) ); ?></div>
+		<div style="display: none" class="cms-li_sold-out-banner"><?php echo esc_html( bech_get_sale_status_string_value( $sale_status ) ); ?></div>
 		<?php endif; ?>
 	</a>
 	<?php endif; ?>
