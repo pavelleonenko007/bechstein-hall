@@ -1162,6 +1162,11 @@ p strong {
 }
 
 @media screen and (max-width: 495px) {
+	#tickets-mob {
+		padding-top: 95rem;
+		margin-top: -50rem;
+	}
+
 	.filter-press {
 		margin-top: 31rem;
 	}
