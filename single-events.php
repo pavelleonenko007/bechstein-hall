@@ -23,7 +23,14 @@ global $post;
             <?php echo wp_get_attachment_image(get_field('main_image', $post->ID), 'full', false, [
               'class' => 'img-fw mob-cover'
             ]); ?>
-            <div class="head-event-content_in">
+            <?php $tinting = get_field('tinting', $post->ID);
+            $classes = 'head-event-content_in';
+
+            if (!empty($tinting) || false !== $tinting) {
+              $classes .= ' head-event-content_in--tinted';
+            }
+            ?>
+            <div class="<?php echo esc_attr($classes); ?>">
               <div class="left-event-col left-event">
                 <?php if (bech_is_event_sold_out($post->ID)) : ?>
                   <a bgline="2" href="#" class="booktickets-btn sold-out min">

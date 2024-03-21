@@ -1,3 +1,7 @@
+.head-event-content_in.head-event-content_in--tinted {
+	background: rgba(0, 0, 0, 0.2);
+}
+
 .header-book-head-btn {
 	transform: translateZ(0);
 }
