@@ -1,3 +1,9 @@
+b,
+strong {
+	-moz-osx-font-smoothing: grayscale; /* Firefox */
+	-webkit-font-smoothing: antialiased; /* WebKit  */
+}
+
 .head-event-content_in.head-event-content_in--tinted {
 	background: rgba(0, 0, 0, 0.2);
 }
