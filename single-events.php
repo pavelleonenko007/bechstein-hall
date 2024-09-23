@@ -33,9 +33,9 @@ global $post;
             <div class="<?php echo esc_attr($classes); ?>">
               <div class="left-event-col left-event">
                 <?php if (bech_is_event_sold_out($post->ID)) : ?>
-                  <a bgline="2" href="#" class="booktickets-btn sold-out min">
+                  <!-- <a bgline="2" href="#" class="booktickets-btn sold-out min">
                     <strong>All tickets sold out</strong>
-                  </a>
+                  </a> -->
                 <?php endif; ?>
                 <h1 class="h1-75-90 event-h"><?php the_title(); ?></h1>
                 <div class="p-25-40">
