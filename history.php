@@ -23,7 +23,7 @@ Template name: History
 			<div class="smooth-conatienr">
 				<section data-w-id="0bfb1cea-2e49-24c6-20ea-92e2a2394a01" class="section his-start-section wf-section">
 					<h1 data-w-id="0bfb1cea-2e49-24c6-20ea-92e2a2394a23" class="h1-75-90 history">HISTORY</h1>
-					<div class="text-block-8">Jessica Duchen</div>
+					<div class="text-block-8" style="display: none">Jessica Duchen</div>
 					<p data-w-id="3ad2e894-31d6-eb80-7483-d3d2a4d7ae2c" class="p-25-40 history-page">Bechstein Hall is London’s newest recital venue. Yet it is also one with a fascinating history: indeed, the space predates its famous neighbour at no. 36. The association of 18-22 Wigmore Street with the piano trade goes back to the late 19th century when it was constructed for John Brinsmead and Sons.</p>
 					<div data-w-id="709b1c3b-8026-956a-adfc-ef232fca1cec" class="div-block-4"></div>
 					<div class="images-liner">
@@ -152,6 +152,7 @@ Template name: History
 							<div class="his-left lft"></div>
 							<div class="his-right m691 m3">
 								<p data-w-id="78a61c88-637f-110c-6ea1-5d33e6624c67" class="p-20-35">In 1914 almost 100 of the men from the Brinsmead workforce were recruited into active service and in spring of 1917 the firm was forced to make parts for aircraft. This caused an obvious, and intense, pressure on the business until finally in spring 1921 John Brinsmead and Sons was declared insolvent.<br><br>In 1889, Carl Bechstein’s piano firm from Berlin chose 40 Wigmore Street as the site for its London operations. They followed their London success by establishing in 1901 a concert hall at no. 36, originally known as Bechstein Hall. However, in 1916, during the surge of anti-German sentiment that accompanied the ongoing First World War, the property was confiscated and sold to Debenham’s for £56,500. The venue reopened the following year under a new name: Wigmore Hall.<br><br>The Bechstein association has been absent from Wigmore Street ever since, but the 21st century seems to demand a new approach. With the restoration of this historic recital venue, complete with all mod cons, Wigmore Street acquires a little sister to its famous hall and restores at long last the historic link between this delectable location and the firm of Bechstein itself.<br></p>
+								<div class="text-block-8" style="width: 100%; text-align: center;">Jessica Duchen</div>
 							</div>
 						</div>
 					</section>
