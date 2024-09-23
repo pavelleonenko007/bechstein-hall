@@ -31,7 +31,8 @@ Template name: History
 							<div class="image-his-item _1m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a0fdf77a4376107f95_img-min.jpg" loading="lazy" alt class="image-cards"></div>
 							<div class="image-his-item _2m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a008f8f4440e5e0778_img-1-min.jpg" loading="lazy" alt class="image-cards"></div>
 							<div class="image-his-item _3m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a04cfca040db185764_img-2-min.jpg" loading="lazy" alt class="image-cards"></div>
-							<div class="image-his-item _4m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a04cfca040db185764_img-2-min.jpg" loading="lazy" alt class="image-cards"></div>
+							<div class="image-his-item _4m" style="border-radius: 10rem; overflow: hidden;">
+								<img src="<?php echo get_template_directory_uri() ?>/images/Brinsmead-Concert-Hall.jpg" loading="lazy" alt class="image-cards"></div>
 						</div>
 						<div class="splide hist-page">
 							<div class="splide__track">
