@@ -23,6 +23,7 @@ global $post;
             <?php echo wp_get_attachment_image(get_field('main_image', $post->ID), 'full', false, [
               'class' => 'img-fw mob-cover'
             ]); ?>
+						<?php echo wp_get_attachment_image(get_field('author_image', $post->ID), 'full', false, ['class' => 'img-fw img-fw--mobile mob-cover']); ?>
             <?php $tinting = get_field('tinting', $post->ID);
             $classes = 'head-event-content_in';
 

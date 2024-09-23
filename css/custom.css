@@ -1093,6 +1093,10 @@ p strong {
 	display: inline-block;
 }
 
+.img-fw--mobile {
+	display: none;
+}
+
 @media screen and (min-width: 1920px) {
 	.cms-li_content .booktickets-btn,
 	.cms-li_content .cms-li_price {
@@ -1172,6 +1176,14 @@ p strong {
 }
 
 @media screen and (max-width: 495px) {
+	.head-event-content.single-page .img-fw.mob-cover {
+		display: none;
+	}
+
+	.head-event-content.single-page .img-fw.img-fw--mobile {
+		display: block;
+	}
+
 	#tickets-mob {
 		padding-top: 95rem;
 		margin-top: -50rem;
