@@ -116,7 +116,7 @@ defined( 'ABSPATH' ) || exit; ?>
 							?>
 							<a href="<?php echo esc_url( bech_format_email_link( $email ) ); ?>"><?php echo esc_html( $email ); ?></a>
 						<?php endif; ?>
-						London, W1U 2RJ, 18 – 22 Wigmore Street
+						London, W1U 2RJ, 22 Wigmore Street
 					</div>
 				</div>
 				<?php
