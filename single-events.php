@@ -278,8 +278,10 @@ global $post;
                       <div class="p-20-30 w20 m30"><?php echo date('d F', strtotime(get_post_meta($ticket->ID, '_bechtix_ticket_start_date', true))); ?></div>
                       <div class="p-20-30 w20"><?php echo bech_get_ticket_times($ticket->ID); ?></div>
                     </div>
+										aaaaa
                     <div class="events-ticket_right">
                       <?php $sale_status = get_post_meta($ticket->ID, '_bechtix_sale_status', true);
+											var_dump($sale_status);
                       $sale_statuses = [
                         'No Status',
                         'Few tickets',

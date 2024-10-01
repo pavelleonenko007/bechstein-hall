@@ -347,6 +347,14 @@ html {
 	font-size: 1px;
 }
 
+.events-ticket_right--disabled {
+	justify-content: center;
+}
+
+.booktickets-btn.min {
+	margin-bottom: 0;
+}
+
 .booktickets-btn.sold-out {
 	pointer-events: none;
 }
