@@ -1129,6 +1129,10 @@ p strong {
 }
 
 @media screen and (max-width: 991px) {
+	.slider-wvwnts_top-cats {
+		display: none;
+	}
+	
 	.head-event-content_in.home-slid {
 		height: 100%;
 	}
