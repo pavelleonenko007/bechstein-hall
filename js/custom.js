@@ -1332,8 +1332,6 @@ const getTickets = async (filters) => {
       })
     ).json();
 
-    console.log(response);
-
     if (response.status !== 'success') {
       throw new Error(data.message);
     }
@@ -1885,8 +1883,6 @@ const initWhatsOnFilters = () => {
     const formData = new FormData(filterFormNode);
     const response = await getTickets(formData);
 
-    console.log(response);
-
     if (response.status !== 'success') {
       window.alert(`Error: ${response.message}`);
     }
@@ -2035,8 +2031,6 @@ function initWhatsOnFilters3() {
       if (response.status !== 'success') {
         throw new Error(response.message);
       }
-
-      console.log(response);
 
       const ticketsContainer = document.querySelector('.cms-tems');
       const ticketsHTML = response.data.html;

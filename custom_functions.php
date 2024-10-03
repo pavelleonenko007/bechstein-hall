@@ -579,38 +579,6 @@ function bech_get_selected_filters_string( array $params ): string {
 	}
 
 	return join( ', ', $selected_params );
-
-	// if (!empty($params['from'])) {
-	// $dates_values = array_values(array_filter($params, function ($value, $param) {
-	// return $param === 'from' || ($param === 'to' && $value !== '');
-	// }, ARRAY_FILTER_USE_BOTH));
-
-	// $formatted_dates = array_map(function ($date) {
-	// $date_time = new DateTime($date);
-	// return $date_time->format('j M Y');
-	// }, $dates_values);
-
-	// $selected_string .= implode('–', $formatted_dates) . ', ';
-	// }
-
-	// foreach ($params as $prop => $param) {
-	// if ($prop === 'genres' || $prop === 'instruments' || $prop === 'time' || $prop === 'festival' || $prop === 'event_tag' || $prop === 's') {
-	// if ($prop === 'festival') {
-	// foreach ($param as $festival_id) {
-	// $festival = get_post($festival_id);
-	// $selected_string .= $festival->post_title;
-	// $selected_string .= ', ';
-	// }
-	// } else {
-	// $selected_string .= is_array($param) ? implode(', ', $param) : $param;
-	// $selected_string .= ', ';
-	// }
-	// }
-	// }
-
-	// $selected_string = mb_substr($selected_string, 0, -2);
-
-	// return $selected_string;
 }
 
 /**
@@ -667,21 +635,19 @@ function bech_get_filtered_tickets() {
 			),
 			400
 		);
-		wp_die();
 	}
 
-	$data            = "<p class='no-event-message'>There is no events — we're working on a concert program.</p>";
-	$selected_string = bech_get_selected_filters_string( $_POST );
+	$html = '';
 
-	$events_args = array(
-		'post_type'      => 'events',
-		'post_status'    => 'publish',
-		'posts_per_page' => -1,
-		'fields'         => 'ids',
+	$tickets_query_args = array(
+		'post_type' => 'tickets',
+		'orderby'   => 'meta_value',
+		'meta_key'  => '_bechtix_ticket_start_date',
+		'order'     => 'ASC',
 	);
 
 	if ( isset( $_POST['genres'] ) ) {
-		$events_args['tax_query'][] = array(
+		$tickets_query_args['tax_query'][] = array(
 			'taxonomy' => 'genres',
 			'field'    => 'slug',
 			'terms'    => $_POST['genres'],
@@ -689,7 +655,7 @@ function bech_get_filtered_tickets() {
 	}
 
 	if ( isset( $_POST['instruments'] ) ) {
-		$events_args['tax_query'][] = array(
+		$tickets_query_args['tax_query'][] = array(
 			'taxonomy' => 'instruments',
 			'field'    => 'slug',
 			'terms'    => $_POST['instruments'],
@@ -697,7 +663,7 @@ function bech_get_filtered_tickets() {
 	}
 
 	if ( isset( $_POST['event_tag'] ) ) {
-		$events_args['tax_query'][] = array(
+		$tickets_query_args['tax_query'][] = array(
 			'taxonomy' => 'event_tag',
 			'field'    => 'slug',
 			'terms'    => $_POST['event_tag'],
@@ -705,71 +671,28 @@ function bech_get_filtered_tickets() {
 	}
 
 	if ( isset( $_POST['festival'] ) ) {
-		$events_args['meta_query'][] = array(
+		$tickets_query_args['meta_query'][] = array(
 			'key'     => '_bechtix_festival_relation',
 			'value'   => $_POST['festival'],
 			'compare' => 'IN',
 		);
 	}
 
-	if ( ! empty( $_POST['s'] ) ) {
-		$events_args['s'] = $_POST['s'];
-	}
-
-	$events_query = new WP_Query( $events_args );
-
-	if ( empty( $events_query->posts ) ) {
-		wp_send_json(
-			array(
-				'status'  => 'success',
-				'message' => 'Data succesfully updated',
-				'data'    => array(
-					'status'          => 200,
-					'html'            => $data,
-					'selected_string' => $selected_string,
-					'max_pages'       => 1,
-				),
-			),
-			200
-		);
-		wp_die();
-	}
-
-	$tickets_args = array(
-		'post_type'      => 'tickets',
-		'post_status'    => 'publish',
-		'posts_per_page' => 10,
-		'orderby'        => 'meta_value',
-		'meta_key'       => '_bechtix_ticket_start_date',
-		'order'          => 'ASC',
-		'meta_query'     => array(
-			array(
-				'key'     => '_bechtix_event_relation',
-				'value'   => $events_query->posts,
-				'compare' => 'IN',
-			),
-		),
-	);
-
-	if ( isset( $_POST['paged'] ) ) {
-		$tickets_args['paged'] = $_POST['paged'];
-	}
-
 	if ( ! empty( $_POST['from'] ) ) {
-		$dt = new DateTime( $_POST['from'] );
+		$from_dt = new DateTime( $_POST['from'] );
 
-		$tickets_args['meta_query'][] = array(
+		$tickets_query_args['meta_query'][] = array(
 			'key'     => '_bechtix_ticket_start_date',
-			'value'   => $dt->format( 'Y-m-d H:i:s' ),
+			'value'   => $from_dt->format( 'Y-m-d H:i:s' ),
 			'compare' => '>=',
 			'type'    => 'DATETIME',
 		);
 
 		if ( ! empty( $_POST['to'] ) ) {
-			$dt                           = new DateTime( $_POST['to'] );
-			$tickets_args['meta_query'][] = array(
+			$to_dt                              = new DateTime( $_POST['to'] );
+			$tickets_query_args['meta_query'][] = array(
 				'key'     => '_bechtix_ticket_start_date',
-				'value'   => $dt->format( 'Y-m-d H:i:s' ),
+				'value'   => $to_dt->format( 'Y-m-d H:i:s' ),
 				'compare' => '<=',
 				'type'    => 'DATETIME',
 			);
@@ -779,7 +702,7 @@ function bech_get_filtered_tickets() {
 			$datetime  = new DateTime( 'today' );
 			$next_date = new DateTime( 'tomorrow' );
 
-			$tickets_args['meta_query'][] = array(
+			$tickets_query_args['meta_query'][] = array(
 				'key'     => '_bechtix_ticket_start_date',
 				'value'   => array( $datetime->format( 'Y-m-d H:i:s' ), $next_date->format( 'Y-m-d H:i:s' ) ),
 				'compare' => 'BETWEEN',
@@ -790,7 +713,7 @@ function bech_get_filtered_tickets() {
 			$next_date = new DateTime( 'tomorrow' );
 			$next_date->modify( '+1 day' );
 
-			$tickets_args['meta_query'][] = array(
+			$tickets_query_args['meta_query'][] = array(
 				'key'     => '_bechtix_ticket_start_date',
 				'value'   => array( $datetime->format( 'Y-m-d H:i:s' ), $next_date->format( 'Y-m-d H:i:s' ) ),
 				'compare' => 'BETWEEN',
@@ -807,22 +730,22 @@ function bech_get_filtered_tickets() {
 				iterator_to_array( $periods )
 			);
 
-			$tickets_args['meta_query'][] = array(
+			$tickets_query_args['meta_query'][] = array(
 				'key'     => '_bechtix_ticket_start_date',
 				'value'   => array( $days[0], $days[7] ),
 				'compare' => 'BETWEEN',
 				'type'    => 'DATETIME',
 			);
 		} elseif ( $_POST['time'] === 'weekend' ) {
-			$dt                           = new DateTime( 'next Saturday' );
-			$periods                      = new DatePeriod( $dt, new DateInterval( 'P1D' ), 2 );
-			$days                         = array_map(
+			$dt                                 = new DateTime( 'next Saturday' );
+			$periods                            = new DatePeriod( $dt, new DateInterval( 'P1D' ), 2 );
+			$days                               = array_map(
 				function ( $datetime ) {
 					return $datetime->format( 'Y-m-d H:i:s' );
 				},
 				iterator_to_array( $periods )
 			);
-			$tickets_args['meta_query'][] = array(
+			$tickets_query_args['meta_query'][] = array(
 				'key'     => '_bechtix_ticket_start_date',
 				'value'   => $days,
 				'compare' => 'BETWEEN',
@@ -831,73 +754,47 @@ function bech_get_filtered_tickets() {
 		}
 	}
 
-	$tickets_query = new WP_Query( $tickets_args );
-	$tickets       = $tickets_query->posts;
-
-	if ( ! empty( $_POST['time'] ) && empty( $_POST['from'] ) && ! empty( $tickets ) ) {
-		// $sorted_tickets = bech_sort_tickets($tickets, false);
-		$date_map = array(
-			'today'     => 'Today',
-			'tomorrow'  => 'Tomorrow',
-			'weekend'   => 'This Weekend',
-			'next-week' => 'Next Week',
-		);
-		ob_start(); ?>
-		<div class="cms-ul">
-			<div class="cms-heading">
-				<h2 class="h2-cms"><?php echo $date_map[ $_POST['time'] ]; ?></h2>
-				<h2 class="h2-cms day"><?php echo bech_get_smaller_date( $_POST['time'] ); ?></h2>
-			</div>
-			<div class="cms-ul-events">
-				<?php
-				foreach ( $tickets as $ticket ) :
-					?>
-					<?php
-					get_template_part(
-						'inc/components/whats-on-ticket',
-						'',
-						array(
-							'ticket' => $ticket->ID,
-						)
-					);
-					?>
-				<?php endforeach; ?>
-			</div>
-		</div>
-		<?php
-		$data = ob_get_clean();
-	} else {
-		$sorted_tickets = bech_sort_tickets( $tickets );
-		ob_start();
-		if ( ! empty( $sorted_tickets ) ) :
-			foreach ( $sorted_tickets as $date => $tickets ) :
-				?>
-				<div class="cms-ul">
-					<div class="cms-heading">
-						<h2 class="h2-cms"><?php echo date( 'd F Y', $date ); ?></h2>
-						<h2 class="h2-cms day"><?php echo date( 'l', $date ); ?></h2>
-					</div>
-					<div class="cms-ul-events">
-						<?php
-						foreach ( $tickets as $ticket ) :
-							?>
-							<?php
-							get_template_part(
-								'inc/components/whats-on-ticket',
-								'',
-								array(
-									'ticket' => $ticket->ID,
-								)
-							);
-							?>
-						<?php endforeach; ?>
-					</div>
-				</div>
-				<?php
-			endforeach;
-			$data = ob_get_clean();
-		endif;
+	if ( ! empty( $_POST['s'] ) ) {
+		$tickets_query_args['s'] = $_POST['s'];
 	}
+
+	if ( ! empty( $_POST['paged'] ) ) {
+		$tickets_query_args['paged'] = intval( $_POST['paged'] );
+	}
+
+	$tickets_query = new WP_Query( $tickets_query_args );
+
+	ob_start();
+
+	if ( $tickets_query->have_posts() ) {
+		$dates = bech_sort_tickets( $tickets_query->posts );
+
+		foreach ( $dates as $date => $tickets ) {
+			?>
+			<div class="cms-ul">
+				<div class="cms-heading">
+					<h2 class="h2-cms"><?php echo date( 'd F Y', $date ); ?></h2>
+					<h2 class="h2-cms day"><?php echo date( 'l', $date ); ?></h2>
+				</div>
+				<div class="cms-ul-events">
+					<?php
+					foreach ( $tickets as $ticket ) :
+						get_template_part(
+							'inc/components/whats-on-ticket',
+							null,
+							array(
+								'ticket' => $ticket->ID,
+							)
+						);
+					endforeach;
+					?>
+				</div>
+			</div>
+			<?php
+		}
+	}
+
+	$html = ob_get_clean();
 
 	wp_send_json(
 		array(
@@ -905,18 +802,17 @@ function bech_get_filtered_tickets() {
 			'message' => 'Data succesfully updated',
 			'data'    => array(
 				'status'          => 200,
-				'html'            => $data,
-				'selected_string' => $selected_string,
+				'html'            => $html,
+				'selected_string' => bech_get_selected_filters_string( $_POST ),
 				'max_pages'       => $tickets_query->max_num_pages,
 				'posts_count'     => $tickets_query->post_count,
 			),
 		),
 		200
 	);
-	wp_die();
 }
 
-/* What's on filters */
+	/* What's on filters */
 
 function bech_get_youtube_video_id_from_link( $link = '' ) {
 	preg_match( '/watch\?v=(.+)/', $link, $matches );
@@ -945,9 +841,8 @@ function bech_custom_logo( $return = false ) {
 	}
 }
 
-
-add_action( 'wp_ajax_get_press_release_posts', 'bech_get_press_release_posts' );
-add_action( 'wp_ajax_nopriv_get_press_release_posts', 'bech_get_press_release_posts' );
+	add_action( 'wp_ajax_get_press_release_posts', 'bech_get_press_release_posts' );
+	add_action( 'wp_ajax_nopriv_get_press_release_posts', 'bech_get_press_release_posts' );
 
 function bech_get_press_release_posts(): void {
 	$args = array(
@@ -973,43 +868,43 @@ function bech_get_press_release_posts(): void {
 	ob_start();
 	?>
 	<div class="cms-press-ajax">
-		<?php
-		if ( $press_query->have_posts() ) {
-			while ( $press_query->have_posts() ) {
-				$press_query->the_post();
-				?>
+	<?php
+	if ( $press_query->have_posts() ) {
+		while ( $press_query->have_posts() ) {
+			$press_query->the_post();
+			?>
 				<a href="<?php echo get_the_permalink(); ?>" class="ui-pressrelease-a w-inline-block">
 					<div class="p-20-30 w20"><?php echo get_the_date( 'j F Y' ); ?></div>
 					<div class="p-25-40 mar13"><?php echo get_the_title(); ?></div>
 				</a>
 				<?php
-			}
-			wp_reset_postdata();
+		}
+		wp_reset_postdata();
 
-			if ( $press_query->max_num_pages > 1 && intval( $_POST['page'] ) < $press_query->max_num_pages ) {
-				?>
+		if ( $press_query->max_num_pages > 1 && intval( $_POST['page'] ) < $press_query->max_num_pages ) {
+			?>
 				<a href="#" class="showmore-btn w-inline-block">
 					<div>SHOW MORE</div>
 				</a>
-				<?php
-			}
-		} else {
-			?>
+			<?php
+		}
+	} else {
+		?>
 			<p>NO POSTS</p>
 		<?php } ?>
 	</div>
-	<?php
-	$html     = ob_get_clean();
-	$response = array(
-		'status' => 'success',
-		'html'   => $html,
-	);
-	wp_send_json( $response, 200 );
-	wp_die();
+		<?php
+		$html     = ob_get_clean();
+		$response = array(
+			'status' => 'success',
+			'html'   => $html,
+		);
+		wp_send_json( $response, 200 );
+		wp_die();
 }
 
-add_action( 'wp_ajax_get_homepage_slider_items', 'bech_get_homepage_slider_items' );
-add_action( 'wp_ajax_nopriv_get_homepage_slider_items', 'bech_get_homepage_slider_items' );
+	add_action( 'wp_ajax_get_homepage_slider_items', 'bech_get_homepage_slider_items' );
+	add_action( 'wp_ajax_nopriv_get_homepage_slider_items', 'bech_get_homepage_slider_items' );
 
 function bech_get_homepage_slider_items() {
 	if ( ! wp_verify_nonce( $_POST['home_filter_action'], 'home_filter_action_nonce' ) ) {
@@ -1070,10 +965,10 @@ function bech_get_homepage_slider_items() {
 			<div class="slider-wvwnts_slide wo-slider_item wo-slide">
 				<div class="link-block">
 					<div class="slider-wvwnts_top">
-						<?php
-						global $post;
-						$event_cat = get_the_terms( $post, 'event_cat' );
-						?>
+					<?php
+					global $post;
+					$event_cat = get_the_terms( $post, 'event_cat' );
+					?>
 						<img src="<?php echo get_field( 'event_image', $event_cat[0] ); ?>" loading="eager" alt class="img-cover">
 						<?php
 						$term_query = wp_get_object_terms(
@@ -1086,7 +981,7 @@ function bech_get_homepage_slider_items() {
 						);
 						?>
 						<div class="slider-wvwnts_top-cats">
-							<?php foreach ( $term_query as $term ) : ?>
+						<?php foreach ( $term_query as $term ) : ?>
 								<a href="#" class="slider-wvwnts_top-cats_a"><?php echo $term->name; ?></a>
 							<?php endforeach; ?>
 						</div>
@@ -1102,7 +997,7 @@ function bech_get_homepage_slider_items() {
 					</div>
 				</div>
 			</div>
-			<?php
+				<?php
 		}
 	} else {
 		?>
@@ -1119,7 +1014,6 @@ function bech_get_homepage_slider_items() {
 	);
 	wp_die();
 }
-
 
 function bech_get_format_date_for_whats_on_slide( $post_id ) {
 	$start_date = strtotime( get_post_meta( $post_id, '_bechtix_ticket_start_date', true ) );
@@ -1233,9 +1127,8 @@ function bech_get_the_content_without_formatting( $post_id ) {
 	return strip_tags( get_the_content( null, false, $post_id ), array( 'br', 'a', 'b', 'strong', 'i' ) );
 }
 
-
-add_action( 'wp_ajax_get_more_filter_buttons', 'bech_get_more_filter_buttons' );
-add_action( 'wp_ajax_nopriv_get_more_filter_buttons', 'bech_get_more_filter_buttons' );
+	add_action( 'wp_ajax_get_more_filter_buttons', 'bech_get_more_filter_buttons' );
+	add_action( 'wp_ajax_nopriv_get_more_filter_buttons', 'bech_get_more_filter_buttons' );
 function bech_get_more_filter_buttons() {
 	if ( isset( $_POST['taxonomy'] ) && $_POST['taxonomy'] !== '' ) {
 		$taxonomy_terms_count = wp_count_terms( $_POST['taxonomy'] );
@@ -1277,8 +1170,8 @@ function bech_get_more_filter_buttons() {
 				<input data-filter="checkbox" type="checkbox" id="<?php echo $other_filter->taxonomy . '-' . $other_filter->term_id; ?>" name="<?php echo $other_filter->taxonomy; ?>[]" value="<?php echo $other_filter->slug; ?>" style="opacity:0;position:absolute;z-index:-1" />
 				<span class="filter-cbx ischbx w-form-label" for="<?php echo $other_filter->taxonomy . '-' . $other_filter->term_id; ?>"><?php echo $other_filter->name; ?></span>
 			</label>
-			<?php
-endforeach;
+				<?php
+	endforeach;
 
 		$html = ob_get_clean();
 
@@ -1302,7 +1195,7 @@ endforeach;
 	}
 }
 
-add_action( 'admin_menu', 'bech_register_custom_admin_links' );
+	add_action( 'admin_menu', 'bech_register_custom_admin_links' );
 function bech_register_custom_admin_links() {
 	add_menu_page( null, 'Global Widgets', 'edit_posts', '/widgets.php', null, 'dashicons-welcome-widgets-menus', 25 );
 	add_menu_page( null, 'Header & Footer', 'edit_posts', '/themes.php?page=options#footer-&-header-fields', null, 'dashicons-align-center', 26 );
@@ -1311,19 +1204,19 @@ function bech_register_custom_admin_links() {
 	add_menu_page( null, 'Tickets Information', 'edit_posts', '/themes.php?page=options#tickets-information', null, 'dashicons-info', 29 );
 }
 
-// add_filter('wp_insert_post_data', function ($data, $postarr) {
-// $data['post_content'] = wpautop($data['post_content']);
-// return $data;
-// }, 10, 2);
+	// add_filter('wp_insert_post_data', function ($data, $postarr) {
+	// $data['post_content'] = wpautop($data['post_content']);
+	// return $data;
+	// }, 10, 2);
 
-/**
- * [
- *  [
- *      'date' => DateTime,
- *      'customer_id' => int|''
- *  ]
- * ]
- */
+	/**
+	 * [
+	 *  [
+	 *      'date' => DateTime,
+	 *      'customer_id' => int|''
+	 *  ]
+	 * ]
+	 */
 
 function bech_get_min_date_index( array $dates ): int {
 	$index    = 0;
@@ -1370,7 +1263,7 @@ function bech_get_page_by_slug( string $slug ) {
 	}
 }
 
-add_filter( 'pto/posts_orderby/ignore', 'bech_ignore_tix_queryes_orderby', 10, 3 );
+	add_filter( 'pto/posts_orderby/ignore', 'bech_ignore_tix_queryes_orderby', 10, 3 );
 function bech_ignore_tix_queryes_orderby( $ignore, $orderBy, $query ) {
 	$query_vars = $query->query_vars;
 	if ( $query_vars['post_type'] === 'tickets' || $query_vars['post_type'] === 'events' || $query_vars['post_type'] === 'festivals' ) {
@@ -1446,8 +1339,8 @@ function bech_get_whats_on_ticket_image( $post_id ): string {
 	) : '';
 }
 
-add_filter( 'wpseo_metadesc', 'bech_set_default_custom_meta_description' );
-add_filter( 'wpseo_opengraph_desc', 'bech_set_default_custom_meta_description' );
+	add_filter( 'wpseo_metadesc', 'bech_set_default_custom_meta_description' );
+	add_filter( 'wpseo_opengraph_desc', 'bech_set_default_custom_meta_description' );
 function bech_set_default_custom_meta_description( $description ) {
 	if ( ! $description || empty( $description ) ) {
 		return 'Bechstein Hall official website';
@@ -1455,7 +1348,7 @@ function bech_set_default_custom_meta_description( $description ) {
 	return $description;
 }
 
-add_filter( 'wpseo_schema_webpage', 'bech_set_default_description_field_to_webpage_piece' );
+	add_filter( 'wpseo_schema_webpage', 'bech_set_default_description_field_to_webpage_piece' );
 function bech_set_default_description_field_to_webpage_piece( $data ) {
 	if ( empty( $data['description'] ) ) {
 		$data['description'] = 'Bechstein Hall official website';
@@ -1463,7 +1356,7 @@ function bech_set_default_description_field_to_webpage_piece( $data ) {
 	return $data;
 }
 
-add_action( 'wpseo_add_opengraph_additional_images', 'bech_default_og_image' );
+	add_action( 'wpseo_add_opengraph_additional_images', 'bech_default_og_image' );
 function bech_default_og_image( $image ) {
 	global $post;
 
@@ -1472,9 +1365,9 @@ function bech_default_og_image( $image ) {
 	}
 }
 
-// set the default share image
-add_action( 'wpseo_twitter_image', 'bech_default_share_image' );
-add_action( 'wpseo_opengraph_image', 'bech_default_share_image' );
+	// set the default share image
+	add_action( 'wpseo_twitter_image', 'bech_default_share_image' );
+	add_action( 'wpseo_opengraph_image', 'bech_default_share_image' );
 function bech_default_share_image( $image ) {
 	$home_url = get_home_url();
 	if ( ! $image || $image === 'default' ) { // twitter will pass an empty string for $image while
@@ -1483,19 +1376,17 @@ function bech_default_share_image( $image ) {
 
 	return $image;
 }
-// now we can call the same function for both actions without having to set a default facebook image in the UI
+	// now we can call the same function for both actions without having to set a default facebook image in the UI
 
+	// fix big image upload
+	add_filter( 'big_image_size_threshold', '__return_false' );
 
-// fix big image upload
-add_filter( 'big_image_size_threshold', '__return_false' );
-
-
-/**
- * Convert phone number string to phone link
- *
- * @param string $phone_number Phone number string.
- * @return string Phone number link
- */
+	/**
+	 * Convert phone number string to phone link
+	 *
+	 * @param string $phone_number Phone number string.
+	 * @return string Phone number link
+	 */
 function bech_format_phone_to_link( string $phone_number ): string {
 	if ( empty( $phone_number ) ) {
 		return '';
@@ -1504,13 +1395,13 @@ function bech_format_phone_to_link( string $phone_number ): string {
 	return 'tel:' . preg_replace( '/[^0-9+]/', '', $phone_number );
 }
 
-/**
- * Convert email string to email link
- *
- * @param string $email Email string.
- * @param string $subject Email Subject.
- * @return string Email link
- */
+	/**
+	 * Convert email string to email link
+	 *
+	 * @param string $email Email string.
+	 * @param string $subject Email Subject.
+	 * @return string Email link
+	 */
 function bech_format_email_link( string $email, string $subject = '' ): string {
 	$email_link = "mailto:{$email}";
 
@@ -1519,4 +1410,10 @@ function bech_format_email_link( string $email, string $subject = '' ): string {
 	}
 
 	return esc_url( $email_link );
+}
+
+function bech_dump( $data ) {
+	echo '<pre>';
+	var_dump( $data );
+	echo '</pre>';
 }
