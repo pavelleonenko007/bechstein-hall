@@ -1,6 +1,7 @@
 <?php
 
 defined('ABSPATH') || exit;
+define('YOUR_VISIT_PAGE_ID', 26);
 
 $theme_version = '1657717607';
 

@@ -1,0 +1,45 @@
+{
+    "key": "group_63a58c9e6a396",
+    "title": "Press Office Fields",
+    "fields": [
+        {
+            "key": "field_63a58c9e3c641",
+            "label": "Subheader",
+            "name": "subheader",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Add subheader to post.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Subheader here...",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "press-office"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1727954989
+}

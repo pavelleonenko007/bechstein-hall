@@ -367,8 +367,12 @@
 									<?php endforeach; ?>
 								</div>
 							</div>
-							<?php $your_visit_page_id = 26; ?>
-							<a href="<?php echo esc_url( get_the_permalink( $your_visit_page_id ) ); ?>" class="link-20 white">your visit</a>
+							<?php
+							$link = $your_visit_block['your_visit_link'];
+							if ( ! empty( $link['url'] ) ) :
+								?>
+								<a href="<?php echo esc_url( $link['url'] ); ?>" class="link-20 white" target="<?php echo ! empty( $link['target'] ) ? esc_attr( $link['target'] ) : '_self'; ?>"><?php echo esc_html( $link['title'] . ' ' ); ?></a>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
