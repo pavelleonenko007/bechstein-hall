@@ -75,6 +75,23 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_66ffd29d7037d",
+            "label": "Spotify",
+            "name": "spotify_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -95,5 +112,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1727955022
+    "modified": 1728041914
 }
