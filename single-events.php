@@ -120,7 +120,7 @@ global $post;
                 <div class="info-right-side-bottom">
                   <?php $tickets_information_link = get_field('tickets_information_url', $post->ID) ? get_field('tickets_information_url', $post->ID) : get_field('tickets_information_url', 'option');
 
-                  $seating_plan_link = get_field('seating_plan_url', $post->ID) ? get_field('tickets_information_url', $post->ID) : get_field('seating_plan_url', 'option');
+                  $seating_plan_link = get_field('seating_plan_url', $post->ID) ? get_field('seating_plan_url', $post->ID) : get_field('seating_plan_url', 'option');
 
                   if (trim($tickets_information_link) !== '') : ?>
                     <a href="<?php echo $tickets_information_link; ?>">Tickets information</a>
@@ -275,7 +275,8 @@ global $post;
 									<?php if (!empty($tickets_information_link)): ?>
                   	<a href="<?php echo esc_url($tickets_information_link); ?>">Tickets information</a>
 									<?php endif; ?>
-									<?php if (!empty($seating_plan_link)): ?>
+									<?php 
+									if (!empty($seating_plan_link)): ?>
                   	<a href="<?php echo esc_url($seating_plan_link); ?>">Seating plan</a>
 									<?php endif; ?>
                 </div>
