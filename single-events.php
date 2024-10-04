@@ -271,46 +271,13 @@ global $post;
                   <?php get_template_part('inc/components/single-event-ticket-small'); ?>
                 <?php endwhile;
                 wp_reset_postdata(); ?>
-                <?php foreach ($tickets as $ticket) : ?>
-                  <div class="events-ticket">
-                    <div class="events-ticket_left">
-                      <div class="p-17-25 top-ticket _2"><?php echo date('l', strtotime(get_post_meta($ticket->ID, '_bechtix_ticket_start_date', true))); ?></div>
-                      <div class="p-20-30 w20 m30"><?php echo date('d F', strtotime(get_post_meta($ticket->ID, '_bechtix_ticket_start_date', true))); ?></div>
-                      <div class="p-20-30 w20"><?php echo bech_get_ticket_times($ticket->ID); ?></div>
-                    </div>
-										aaaaa
-                    <div class="events-ticket_right">
-                      <?php $sale_status = get_post_meta($ticket->ID, '_bechtix_sale_status', true);
-											var_dump($sale_status);
-                      $sale_statuses = [
-                        'No Status',
-                        'Few tickets',
-                        'Sold out',
-                        'Cancelled',
-                        'Not scheduled'
-                      ];
-                      if ($sale_status === '0' || $sale_status === '1' || empty($sale_status)) :
-
-                        $purchase_urls = json_decode(get_post_meta($ticket->ID, '_bechtix_purchase_urls', true), true); ?>
-                        <a bgline="1" href="<?php echo $purchase_urls[0]['link']; ?>" data-book-urls="<?php echo _wp_specialchars(wp_json_encode($purchase_urls), ENT_QUOTES, 'UTF-8', true); ?>" class="booktickets-btn min left-side">
-                          <strong>Book tickets</strong>
-                        </a>
-                        <a data-calendar="<?php echo bech_get_ticket_event_data_for_calendar($ticket); ?>" class="event-ticket_calendar-btn min w-inline-block">
-                          <img src="<?php echo get_template_directory_uri() ?>/images/62bc3fe7d9cc6162b22615c0_calendar.svg" loading="lazy" alt class="img-calendar">
-                          <div>ADD TO CALENDAR</div>
-                        </a>
-                      <?php else : ?>
-                        <a bgline="2" href="#" class="booktickets-btn sold-out min">
-                          <strong><?php echo $sale_statuses[$sale_status]; ?></strong>
-                        </a>
-                      <?php endif; ?>
-                    </div>
-                  </div>
-                <?php endforeach;
-                unset($ticket); ?>
                 <div class="info-right-side-bottom">
-                  <div>Tickets information</div>
-                  <div>Seating plan</div>
+									<?php if (!empty($tickets_information_link)): ?>
+                  	<a href="<?php echo esc_url($tickets_information_link); ?>">Tickets information</a>
+									<?php endif; ?>
+									<?php if (!empty($seating_plan_link)): ?>
+                  	<a href="<?php echo esc_url($seating_plan_link); ?>">Seating plan</a>
+									<?php endif; ?>
                 </div>
               </div>
             <?php endif; ?>

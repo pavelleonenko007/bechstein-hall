@@ -82,103 +82,105 @@ Template name: Simple page template
 					</div>
 					<div class="yourvisit-column">
 						<?php $page_sections = get_field('site_sections');
-						foreach ($page_sections as $page_section) : ?>
-							<?php if ($page_section['acf_fc_layout'] === 'information_listing') : ?>
-								<?php foreach ($page_section['blocks'] as $block) : ?>
-									<?php get_template_part('inc/acf-flexible-sections/information-card', '', [
-										'card-info' => $block,
-									]); ?>
-								<?php endforeach; ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'information_grid_listing') : ?>
-								<div class="ui-boxoffice-block">
-									<div class="wig-block">
+						if (!empty($page_sections)):
+							foreach ($page_sections as $page_section) : ?>
+								<?php if ($page_section['acf_fc_layout'] === 'information_listing') : ?>
+									<?php foreach ($page_section['blocks'] as $block) : ?>
+										<?php get_template_part('inc/acf-flexible-sections/information-card', '', [
+											'card-info' => $block,
+										]); ?>
+									<?php endforeach; ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'information_grid_listing') : ?>
+									<div class="ui-boxoffice-block">
+										<div class="wig-block">
+											<div class="div-block-23">
+												<h2 class="h2-35-45">
+													<?php echo $page_section['header']; ?>
+												</h2>
+											</div>
+											<?php $grid_cards = $page_section['grid_blocks'];
+											if (!empty($grid_cards)) : ?>
+												<div class="cms-about">
+													<?php foreach ($grid_cards as $grid_card) : ?>
+														<?php get_template_part('inc/acf-flexible-sections/restoraunt-grid-card', '', [
+															'card' => $grid_card,
+														]); ?>
+													<?php endforeach; ?>
+												</div>
+											<?php endif; ?>
+											<div class="t-line"></div>
+										</div>
+									</div>
+								<?php elseif ($page_section['acf_fc_layout'] === 'dropdown_section') : ?>
+									<div class="ui-boxoffice-block">
 										<div class="div-block-23">
 											<h2 class="h2-35-45">
 												<?php echo $page_section['header']; ?>
 											</h2>
 										</div>
-										<?php $grid_cards = $page_section['grid_blocks'];
-										if (!empty($grid_cards)) : ?>
-											<div class="cms-about">
-												<?php foreach ($grid_cards as $grid_card) : ?>
-													<?php get_template_part('inc/acf-flexible-sections/restoraunt-grid-card', '', [
-														'card' => $grid_card,
+										<?php $dropdowns = $page_section['dropdowns_loop'];
+										if (!empty($dropdowns)) : ?>
+											<div class="cms-drops">
+												<?php foreach ($dropdowns as $dropdown) : ?>
+													<?php get_template_part('inc/acf-flexible-sections/dropdown', '', [
+														'dropdown' => $dropdown,
 													]); ?>
 												<?php endforeach; ?>
 											</div>
 										<?php endif; ?>
-										<div class="t-line"></div>
 									</div>
-								</div>
-							<?php elseif ($page_section['acf_fc_layout'] === 'dropdown_section') : ?>
-								<div class="ui-boxoffice-block">
-									<div class="div-block-23">
-										<h2 class="h2-35-45">
-											<?php echo $page_section['header']; ?>
-										</h2>
-									</div>
-									<?php $dropdowns = $page_section['dropdowns_loop'];
-									if (!empty($dropdowns)) : ?>
-										<div class="cms-drops">
-											<?php foreach ($dropdowns as $dropdown) : ?>
-												<?php get_template_part('inc/acf-flexible-sections/dropdown', '', [
-													'dropdown' => $dropdown,
-												]); ?>
-											<?php endforeach; ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'text_section') : ?>
+									<?php get_template_part('inc/acf-flexible-sections/text-section', '', [
+										'title'   => $page_section['header'],
+										'content' => $page_section['text'],
+									]); ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'text_quote_section') : ?>
+									<?php get_template_part('inc/acf-flexible-sections/blockquote', '', [
+										'blockquote' => $page_section['text_with_quote'],
+									]); ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'quote_with_image') : ?>
+									<?php get_template_part('inc/acf-flexible-sections/blockquote-with-image', '', [
+										'blockquote' => [
+											'author'     => $page_section['author'],
+											'image'      => $page_section['image'],
+											'quote_text' => $page_section['quote_text'],
+										]
+									]); ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'contacts_section') : ?>
+									<?php get_template_part('inc/acf-flexible-sections/contacts', '', [
+										'contacts' => [
+											'header' => $page_section['header'],
+											'text'   => $page_section['text'],
+										]
+									]); ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'announcements_section') : ?>
+									<?php $press_args = [
+										'post_type'      => 'post',
+										'posts_per_page' => 6,
+										'paged'          => get_query_var('page') ?? get_query_var('paged')
+									];
+
+									$press_query = new WP_Query($press_args);
+									if ($press_query->have_posts()) : ?>
+										<div class="cms-press-ajax">
+											<?php while ($press_query->have_posts()) : $press_query->the_post(); ?>
+												<?php get_template_part('inc/components/press-office-component', ''); ?>
+											<?php endwhile;
+											wp_reset_postdata(); ?>
 										</div>
 									<?php endif; ?>
-								</div>
-							<?php elseif ($page_section['acf_fc_layout'] === 'text_section') : ?>
-								<?php get_template_part('inc/acf-flexible-sections/text-section', '', [
-									'title'   => $page_section['header'],
-									'content' => $page_section['text'],
-								]); ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'text_quote_section') : ?>
-								<?php get_template_part('inc/acf-flexible-sections/blockquote', '', [
-									'blockquote' => $page_section['text_with_quote'],
-								]); ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'quote_with_image') : ?>
-								<?php get_template_part('inc/acf-flexible-sections/blockquote-with-image', '', [
-									'blockquote' => [
-										'author'     => $page_section['author'],
-										'image'      => $page_section['image'],
-										'quote_text' => $page_section['quote_text'],
-									]
-								]); ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'contacts_section') : ?>
-								<?php get_template_part('inc/acf-flexible-sections/contacts', '', [
-									'contacts' => [
-										'header' => $page_section['header'],
-										'text'   => $page_section['text'],
-									]
-								]); ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'announcements_section') : ?>
-								<?php $press_args = [
-									'post_type'      => 'post',
-									'posts_per_page' => 6,
-									'paged'          => get_query_var('page') ?? get_query_var('paged')
-								];
-
-								$press_query = new WP_Query($press_args);
-								if ($press_query->have_posts()) : ?>
-									<div class="cms-press-ajax">
-										<?php while ($press_query->have_posts()) : $press_query->the_post(); ?>
-											<?php get_template_part('inc/components/press-office-component', ''); ?>
-										<?php endwhile;
-										wp_reset_postdata(); ?>
-									</div>
+								<?php elseif ($page_section['acf_fc_layout'] === 'booking_tabs_section') : ?>
+									<?php get_template_part('inc/acf-flexible-sections/tabs', '', [
+										'title' => $page_section['header'],
+										'tabs'  => $page_section['tabs']
+									]); ?>
+								<?php elseif ($page_section['acf_fc_layout'] === 'gallery_section') : ?>
+									<?php get_template_part('inc/acf-flexible-sections/image-gallery', '', [
+										'gallery' => $page_section['gallery_loop'],
+									]); ?>
 								<?php endif; ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'booking_tabs_section') : ?>
-								<?php get_template_part('inc/acf-flexible-sections/tabs', '', [
-									'title' => $page_section['header'],
-									'tabs'  => $page_section['tabs']
-								]); ?>
-							<?php elseif ($page_section['acf_fc_layout'] === 'gallery_section') : ?>
-								<?php get_template_part('inc/acf-flexible-sections/image-gallery', '', [
-									'gallery' => $page_section['gallery_loop'],
-								]); ?>
-							<?php endif; ?>
-						<?php endforeach; ?>
+							<?php endforeach; 
+						endif; ?>
 					</div>
 				</div>
 			</section>
