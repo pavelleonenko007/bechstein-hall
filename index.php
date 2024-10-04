@@ -59,7 +59,7 @@
 											endif;
                                             // @codingStandardsIgnoreEnd
 
-											$slide_link        = ! empty( $slide['link'] ) ? $slide_link : '#';
+											$slide_link        = ! empty( $slide['link'] ) ? $slide['link'] : '#';
 											$slide_date_sign   = $slide['date_sign'];
 											$slide_heading     = $slide['slide_heading'];
 											$slide_description = $slide['slide_description'];
