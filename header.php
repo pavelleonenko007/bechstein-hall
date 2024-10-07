@@ -260,8 +260,18 @@ $email           = get_field( 'email', 'option' );
 				<div class="footer-col no-mob">
 					<div class="foo-bottom nz">
 						<a href="#" data-href="#moove_gdpr_cookie_modal" class="link-foo-small _2">Manage Consents</a>
-						<a href="#" class="link-foo-small _2">Terms and Conditions</a>
-						<a href="#" class="link-foo-small last">Privacy policy</a>
+						<?php
+						$terms_page = get_post( TERMS_OF_USE_PAGE_ID );
+						if ( null !== $terms_page ) :
+							?>
+							<a href="<?php echo esc_url( get_the_permalink( $terms_page ) ); ?>" class="link-foo-small _2"><?php echo esc_html( get_the_title( $terms_page ) ); ?></a>
+						<?php endif; ?>
+						<?php
+						$privacy_page = get_post( PRIVACY_POLICY_PAGE_ID );
+						if ( null !== $privacy_page ) :
+							?>
+							<a href="<?php echo esc_url( get_the_permalink( $privacy_page ) ); ?>" class="link-foo-small last"><?php echo esc_html( get_the_title( $privacy_page ) ); ?></a>
+						<?php endif; ?>
 					</div>
 				</div>
 				<div class="footer-col _3">

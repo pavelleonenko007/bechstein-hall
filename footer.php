@@ -199,13 +199,13 @@ defined( 'ABSPATH' ) || exit; ?>
 				<div class="foo-bottom nz">
 					<a href="#" data-href="#moove_gdpr_cookie_modal" class="link-foo-small _2">Manage Consents</a>
 					<?php
-					$terms_page = bech_get_page_by_slug( 'terms-and-conditions' );
+					$terms_page = get_post( TERMS_OF_USE_PAGE_ID );
 					if ( $terms_page ) :
 						?>
 						<a href="<?php echo esc_url( get_the_permalink( $terms_page ) ); ?>" class="link-foo-small _2"><?php echo esc_html( get_the_title( $terms_page ) ); ?></a>
 					<?php endif; ?>
 					<?php
-					$policy_page = bech_get_page_by_slug( 'privacy-policy' );
+					$policy_page = get_post( PRIVACY_POLICY_PAGE_ID );
 					if ( $policy_page ) :
 						?>
 						<a href="<?php echo esc_url( get_the_permalink( $policy_page ) ); ?>" class="link-foo-small last"><?php echo esc_html( get_the_title( $policy_page ) ); ?></a>
