@@ -21,7 +21,7 @@ Template name: Contacts
                 <div class="catalog-row m-revert cont">
                     <?php if (have_posts()) : ?>
                         <?php while (have_posts()) : the_post(); ?>
-                            <div class="filter-column vis">
+                            <div class="filter-column filter-column--contacts vis">
                                 <div class="marer"></div>
                                 <?php $sidebar_contacts = get_field('sidebar_contacts');
                                 if (!empty($sidebar_contacts)) : ?>
