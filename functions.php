@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 define('YOUR_VISIT_PAGE_ID', 26);
+define('NO_EVENTS_TEXT', 'We are having a rest! See you again soon.');
 
 $theme_version = '1657717607';
 

@@ -351,7 +351,7 @@
 									// bech_dump( $next_page_tickets );
 								else :
 									?>
-									<p class="no-event-message">There is no events — we're working on a concert program.</p>
+									<p class="no-event-message"><?php echo esc_html(NO_EVENTS_TEXT); ?></p>
 									<?php
 								endif;
 								?>
