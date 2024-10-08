@@ -7,6 +7,7 @@ $sale_status = get_post_meta($ticket->ID, '_bechtix_sale_status', true);
 $purchase_urls = bech_get_purchase_urls($ticket->ID);
 
 $can_buy_ticket = $sale_status === '0' || $sale_status === '1' || empty($sale_status);
+$is_in_waiting_list = (bool) get_post_meta($ticket->ID, '_bechtix_in_waiting_list', true);
 ?>
 
 <div class="events-ticket">
@@ -24,9 +25,15 @@ $can_buy_ticket = $sale_status === '0' || $sale_status === '1' || empty($sale_st
         <div>ADD TO CALENDAR</div>
       </a>
     <?php else : ?>
-      <a bgline="2" href="#" class="booktickets-btn sold-out min">
-        <strong><?php echo bech_get_sale_status_string_value($sale_status); ?></strong>
-      </a>
+			<?php if ($is_in_waiting_list): ?>
+				<a bgline="1" href="<?php echo $purchase_urls[0]['link']; ?>" data-book-urls="<?php echo bech_get_purchase_urls_attribute($ticket->ID); ?>" target="_blank" class="booktickets-btn min left-side">
+					<strong>Join Waiting List</strong>
+				</a>
+			<?php else: ?>
+				<a bgline="2" href="#" class="booktickets-btn sold-out min">
+					<strong><?php echo bech_get_sale_status_string_value($sale_status); ?></strong>
+				</a>
+			<?php endif; ?>
     <?php endif; ?>
   </div>
 </div>

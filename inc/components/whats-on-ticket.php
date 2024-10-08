@@ -20,6 +20,9 @@
 	$event_image = bech_get_whats_on_ticket_image( $event->ID );
 	$sale_status = get_post_meta( $post->ID, '_bechtix_sale_status', true );
 
+	$can_buy_ticket     = '' === $sale_status || '0' === $sale_status || '1' === $sale_status || '4' === $sale_status;
+	$is_in_waiting_list = (bool) get_post_meta( $post->ID, '_bechtix_in_waiting_list', true );
+
 	/**
 	 *
 	 * Ticket statuses:
@@ -65,7 +68,7 @@
 		</div>
 		<div class="cms-li_actions-div">
 			<?php
-			if ( '' === $sale_status || '0' === $sale_status || '1' === $sale_status || '4' === $sale_status ) :
+			if ( $can_buy_ticket ) :
 				if ( $is_priority_booking_time ) :
 					?>
 					<a bgline="1" class="booktickets-btn priority">
@@ -75,10 +78,18 @@
 				<a bgline="1" href="<?php echo esc_url( $purchase_urls_normal[0]['link'] ); ?>" class="booktickets-btn <?php echo $is_priority_booking_time ? 'none' : ''; ?>">
 					<strong>Book tickets</strong>
 				</a>
-			<?php else : ?>
-				<a bgline="2" href="#" class="booktickets-btn sold-out">
-					<strong><?php echo esc_html( bech_get_sale_status_string_value( $sale_status ) ); ?></strong>
-				</a>
+				<?php
+			else :
+				if ( $is_in_waiting_list ) :
+					?>
+					<a bgline="1" href="<?php echo esc_url( $purchase_urls_normal[0]['link'] ); ?>" class="booktickets-btn">
+						<strong>Join Waiting List</strong>
+					</a>
+				<?php else : ?>
+					<a bgline="2" href="#" class="booktickets-btn sold-out">
+						<strong><?php echo esc_html( bech_get_sale_status_string_value( $sale_status ) ); ?></strong>
+					</a>
+				<?php endif; ?>
 			<?php endif; ?>
 			<a href="<?php echo esc_url( get_the_permalink( $event->ID ) ); ?>" class="readmore-btn w-inline-block">
 				<div>read more</div>
@@ -96,20 +107,26 @@
 	</div>
 	<div class="cms-li_actions-div biger">
 		<?php
-		if ( '' === $sale_status || '0' === $sale_status || '1' === $sale_status || '4' === $sale_status ) :
+		if ( $can_buy_ticket ) :
 			if ( $is_priority_booking_time ) :
 				?>
 				<a bgline="1" class="booktickets-btn priority">
 					<strong>priority booking only</strong>
 				</a>
-		<?php endif; ?>
+			<?php endif; ?>
 			<a bgline="1" href="<?php echo esc_url( $purchase_urls_normal[0]['link'] ); ?>" class="booktickets-btn <?php echo $is_priority_booking_time ? 'none' : ''; ?>">
 				<strong>Book tickets</strong>
 			</a>
 		<?php else : ?>
-			<a bgline="2" href="#" class="booktickets-btn sold-out">
-				<strong><?php echo esc_html( bech_get_sale_status_string_value( $sale_status ) ); ?></strong>
-			</a>
+			<?php if ( $is_in_waiting_list ) : ?>
+				<a bgline="1" href="<?php echo esc_url( $purchase_urls_normal[0]['link'] ); ?>" class="booktickets-btn">
+					<strong>Join Waiting List</strong>
+				</a>
+			<?php else: ?>
+				<a bgline="2" href="#" class="booktickets-btn sold-out">
+					<strong><?php echo esc_html( bech_get_sale_status_string_value( $sale_status ) ); ?></strong>
+				</a>
+			<?php endif; ?>
 		<?php endif; ?>
 		<?php if ( '' === $sale_status || '0' === $sale_status || '4' === $sale_status ) : ?>
 			<?php if ( $is_priority_booking_time ) : ?>
