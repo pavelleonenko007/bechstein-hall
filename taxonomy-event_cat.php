@@ -558,7 +558,7 @@ $category = get_queried_object();
 				</div>
 				<div class="footer-col _3">
 					<div class="foo-bottomer">
-						<div>© 2022, Bechstein Hall</div><a href="https://www.ettyq.com" class="funk-link">Website made by ettyq. ↗</a>
+						<div>© 2022, Bechstein Hall</div><a href="https://www.ettyq.com/industries/creative-agency-for-arts-media-cultural-institutions" class="funk-link">Website made by ettyq. ↗</a>
 					</div>
 				</div>
 			</div>

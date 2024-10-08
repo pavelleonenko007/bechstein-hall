@@ -277,7 +277,7 @@ $email           = get_field( 'email', 'option' );
 				<div class="footer-col _3">
 					<div class="foo-bottomer">
 						<div><?php echo esc_html( get_field( 'copyright', 'option' ) ); ?></div>
-						<a href="https://www.ettyq.com" target="_blank" class="funk-link" rel="nofollow">Website made by ettyq. </a>
+						<a href="https://www.ettyq.com/industries/creative-agency-for-arts-media-cultural-institutions" target="_blank" class="funk-link" rel="nofollow">Website made by ettyq. </a>
 					</div>
 				</div>
 			</div>
