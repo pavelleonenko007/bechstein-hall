@@ -4,6 +4,11 @@ strong {
 	-webkit-font-smoothing: antialiased; /* WebKit  */
 }
 
+.festival-column--relative {
+	position: relative;
+	top: -150rem;
+}
+
 .head-event-content_in.head-event-content_in--tinted {
 	background: rgba(0, 0, 0, 0.2);
 }
@@ -1134,6 +1139,10 @@ p strong {
 }
 
 @media screen and (max-width: 991px) {
+	.festival-column--relative {
+		top: 0;
+	}
+	
 	.slider-wvwnts_top-cats {
 		display: none;
 	}

@@ -45,8 +45,8 @@ Template name: Single post page template
 			</section>
 			<section class="section wf-section">
 				<div class="catalog-row m-revert">
-					<div class="festival-column yvisit">
-						<div class="yvisit-styk yvis _2">
+					<div class="festival-column festival-column--relative yvisit">
+						<div class="yvisit-styk yvis">
 							<?php $hide_sidebar = get_field('hide_original_sidebar');
 							!$hide_sidebar && dynamic_sidebar('custom_bechstein_sidebar');
 							?>

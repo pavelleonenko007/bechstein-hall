@@ -1,3 +1,5 @@
+const mediaQuery = window.matchMedia('screen and (min-width: 992px)')
+
 function isSafariBrowser() {
   return (
     navigator.userAgent.indexOf('Safari') > -1 && 
@@ -10,7 +12,6 @@ document.querySelectorAll('.grey-z').forEach((trigger) => {
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log(entry.isIntersecting);
           $('.navbar').addClass('grey-head-scroll');
         } else {
           //$(".navbar").removeClass('grey-head');
@@ -28,7 +29,6 @@ document.querySelectorAll('.white-z').forEach((trigger) => {
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log(entry.isIntersecting);
           $('.navbar').removeClass('grey-head-scroll');
         } else {
           //$(".navbar").removeClass('grey-head');
@@ -130,7 +130,6 @@ const initBurgerMenu = () => {
 
   burgerMenuButton.addEventListener('click', (event) => {
     event.preventDefault();
-    // console.log(window.svgLoader.close());
     if (burgerMenuButton.classList.contains('menuopenedb')) {
       burgerMenuButton.classList.remove('menuopenedb');
       window.svgLoader.open(true);
@@ -522,8 +521,6 @@ class Calendar {
 
     this._setCalendarHTML();
     this._setDate();
-
-    console.log(this);
   }
 
   _setDate() {
@@ -1175,11 +1172,6 @@ class WhatsOnSlider {
       event.preventDefault();
       this.slideScrolling = true;
     }
-
-    console.log('скроллится ' + this.pageScrolling ? 'страница' : 'слайдер');
-
-    // console.log('dragshiftX', dragShiftX);
-    // console.log('dragshiftY', dragShiftY);
 
     this.sliderContainerNode.removeEventListener('click', this.handleClick);
     // if (Math.abs(dragShift) < 10) return;
@@ -2644,9 +2636,42 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 });
 
+function alignSidebarToHeadingSection(matches = false) {
+	const sidebarNode = document.querySelector('.festival-column--relative');
+	const headingSection = document.querySelector('.head-fest');
+
+	if (!sidebarNode || !headingSection) {
+		return;
+	}
+
+	if (matches) {
+		sidebarNode.style.top = `-${headingSection.scrollHeight}px`;
+	} else {
+		sidebarNode.style.top = null;
+	}
+}
+
+function throttle(fn, wait) {
+  let timeout = null;
+  return (...args) => {
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        fn(...args);
+        timeout = null;
+      }, wait);
+    }
+  };
+}
+
 window.addEventListener('load', () => {
   window.svgLoader.open();
   initTixSessions();
   initBurgerMenu();
-  // initMobileWhatsOnFilters();
+
+	window.addEventListener('resize', throttle(() => {
+		const isDesktop = window.innerWidth >= 992;
+		alignSidebarToHeadingSection(isDesktop);
+	}, 50));
+	
+	alignSidebarToHeadingSection(mediaQuery.matches);	
 });
