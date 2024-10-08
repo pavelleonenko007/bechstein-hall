@@ -637,7 +637,7 @@ function bech_get_filtered_tickets() {
 		);
 	}
 
-	$html = '';
+	$html = '<p class="no-event-message">'. esc_html(NO_EVENTS_TEXT) . '</p>';
 
 	$tickets_query_args = array(
 		'post_type' => 'tickets',
@@ -764,9 +764,9 @@ function bech_get_filtered_tickets() {
 
 	$tickets_query = new WP_Query( $tickets_query_args );
 
-	ob_start();
-
 	if ( $tickets_query->have_posts() ) {
+		ob_start();
+
 		$dates = bech_sort_tickets( $tickets_query->posts );
 
 		foreach ( $dates as $date => $tickets ) {
@@ -792,9 +792,9 @@ function bech_get_filtered_tickets() {
 			</div>
 			<?php
 		}
-	}
 
-	$html = ob_get_clean();
+		$html = ob_get_clean();
+	}
 
 	wp_send_json(
 		array(
