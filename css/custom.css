@@ -531,6 +531,11 @@ html {
 	margin-right: 10rem;
 }
 
+.cms-li_time-div .p-30-45 {
+	color: inherit;               /* Оставляем базовый цвет текста */
+  text-decoration: none;
+}
+
 .ui_alert-block a:after {
 	content: ' →';
 }
