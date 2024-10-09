@@ -870,10 +870,10 @@ class UserCart {
     this._orders = userData.order?.items || [];
     this._user = userData?.user || {};
     this._profileUrl = userData?.profile || '#';
-    this._logoutUrl = 'https://tickets.new.bechsteinhall.com/en/logout/';
-    this._loginUrl = 'https://tickets.new.bechsteinhall.com/en/login/';
+    this._logoutUrl = `https://tickets.${window.location.hostname}/en/logout/`;
+    this._loginUrl = `https://tickets.${window.location.hostname}/en/login/`;
     this._checkoutUrl =
-      'https://tickets.new.bechsteinhall.com/en/buyingflow/order/';
+      `https://tickets.${window.location.hostname}/en/buyingflow/order/`;
     this.expiresTime = Math.floor(userData.order?.expires);
     this.timerInterval = null;
     this.opened = false;
@@ -2390,7 +2390,7 @@ initPressReleaseFilters();
 
 const addTixFrame = () => {
   const frame = document.createElement('iframe');
-  frame.setAttribute('src', 'https://tickets.new.bechsteinhall.com/en/itix');
+  frame.setAttribute('src', `https://tickets.${window.location.hostname}/en/itix`);
   frame.setAttribute('id', 'tix');
   frame.setAttribute(
     'onload',
@@ -2407,12 +2407,12 @@ const initTixSessions = () => {
   const tixIframe = document.getElementById('tix');
   if (!tixIframe) return;
 
-  const TIX_URL = 'https://tickets.new.bechsteinhall.com/en/itix';
+  const TIX_URL = `https://tickets.${window.location.hostname}/en/itix`;
   let isTixConnected = false;
   let tixConntectedInterval = null;
   let counter = 0;
   const getUserData = (event) => {
-    if (event.origin !== 'https://tickets.new.bechsteinhall.com') return;
+    if (event.origin !== `https://tickets.${window.location.hostname}`) return;
     
     window.tixCart.setData(event.data);
     isTixConnected = true;
