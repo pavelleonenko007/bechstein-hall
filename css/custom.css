@@ -374,7 +374,13 @@ html {
 
 .grey-z,
 .white-z {
-	top: calc(100vh - 80rem);
+	height: 10px;
+	top: max(100%, 100vh);
+  translate: 0 -100%;
+}
+
+.grey-z.top-z {
+	top: inherit;
 }
 
 .images-grid a:nth-child(1) {
