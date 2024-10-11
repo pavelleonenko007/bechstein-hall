@@ -384,7 +384,7 @@ html {
 }
 
 .grey-z.top-z {
-	top: inherit;
+	top: min(100%, calc(100vh - 125rem));
 }
 
 .images-grid a:nth-child(1) {
