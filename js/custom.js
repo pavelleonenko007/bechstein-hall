@@ -11,10 +11,7 @@ const blackColorObserver = new IntersectionObserver(
 	(entries, observer) => {
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
-				console.log('black');
 				$('.navbar').addClass('grey-head-scroll');
-			} else {
-				console.log('not black');
 			}
 		});
 	},
@@ -27,10 +24,7 @@ const whiteColorObserver = new IntersectionObserver(
 	(entries, observer) => {
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
-				console.log('white');
 				$('.navbar').removeClass('grey-head-scroll');
-			} else {
-				console.log('not white');
 			}
 		});
 	},
@@ -1284,7 +1278,6 @@ class WhatsOnSlider {
 		this._data = data ? data : this._data;
 		this.sliderContainerNode.innerHTML = this._getMarkup();
 		this.slideNodes = this.sliderContainerNode.querySelectorAll('.wo-slide');
-		console.log(this.slideNodes);
 		this._slideSize = this.slideNodes[0].getBoundingClientRect();
 		this.setSlidesPosition();
 		this.sliderContainerNode.classList.add('wo-slider--ready');
@@ -1838,8 +1831,6 @@ const initLoader = () => {
 		loaderNode.dataset.show === 'true'
 	) {
 		openVideoPlayer();
-	} else {
-		console.log('hide loader');
 	}
 
 	if (openPlayerButton) {
@@ -1956,10 +1947,12 @@ const initWhatsOnFilters = () => {
 // initWhatsOnFilters();
 
 function initWhatsOnFilters3() {
-	let hasSelectedFilters = false;
 	const filterForm = document.querySelector('[data-filter="form"]');
 
 	if (!filterForm) return;
+
+	let hasSelectedFilters = false;
+	let abortController = null;
 
 	const calendarWidget = new CalendarWidget('calendar-widget');
 	const filters = Array.from(
@@ -1982,7 +1975,6 @@ function initWhatsOnFilters3() {
 		const label = timeFilter.nextElementSibling;
 
 		label.addEventListener('click', (event) => {
-			console.log(timeFilter.checked);
 			if (timeFilter.checked) {
 				event.preventDefault();
 				timeFilter.removeAttribute('checked');
@@ -1992,7 +1984,13 @@ function initWhatsOnFilters3() {
 		});
 	});
 
-	async function submitFormCallback(event) {
+	const submitFormCallback = debounce(async function(event) {
+		if (abortController) {
+			abortController.abort();
+		}
+
+		abortController = new AbortController();
+
 		event?.preventDefault();
 
 		const formData = new FormData(filterForm);
@@ -2008,9 +2006,7 @@ function initWhatsOnFilters3() {
 			formData.get('time')
 		) {
 			hasSelectedFilters = true;
-			console.log('has selected true');
 		} else {
-			console.log('has selected false');
 			hasSelectedFilters = false;
 		}
 
@@ -2022,14 +2018,25 @@ function initWhatsOnFilters3() {
 		}
 
 		try {
-			const response = await getTickets(formData);
+			// const response = await getTickets(formData);
 
-			if (response.status !== 'success') {
-				throw new Error(response.message);
+			// if (response.status !== 'success') {
+			// 	throw new Error(response.message);
+			// }
+
+			const response = await fetch(bech_var.url, {
+				method: 'POST',
+				body: formData,
+				signal: abortController.signal,
+			});
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 
+			const json = await response.json();
 			const ticketsContainer = document.querySelector('.cms-tems');
-			const ticketsHTML = response.data.html;
+			const ticketsHTML = json.data.html;
 
 			if (Number(pageNumberInput.value) > 1) {
 				ticketsContainer.insertAdjacentHTML('beforeend', ticketsHTML);
@@ -2041,20 +2048,28 @@ function initWhatsOnFilters3() {
 				(button) =>
 					(button.querySelector(
 						'strong'
-					).textContent = `Show ${response.data.posts_count} events`)
+					).textContent = `Show ${json.data.posts_count} events`)
 			);
-			showSelectedFilters(response.data.selected_string);
+			showSelectedFilters(json.data.selected_string);
 			if (hasSelectedFilters) {
 				showPopupShowEventsButtons();
 			}
 			loadMoreTriggerNode.setAttribute(
 				'data-max-pages',
-				response.data.max_pages
+				json.data.max_pages
 			);
-		} catch (e) {
-			window.alert(e.message);
+		} catch (error) {
+			if (error.name === 'AbortError') {
+				console.log('Fetch aborted');
+			} else {
+				window.alert(`Fetch error: ${error.message}`);
+				console.error('Fetch error:', error);
+			}
+		} finally {
+			abortController = null;
 		}
-	}
+	}, 500);
+
 	const clearFilters = (event) => {
 		event?.preventDefault();
 		filterForm.reset();
@@ -2348,8 +2363,6 @@ const initPressReleaseFilters = () => {
 					body: formData,
 				})
 			).json();
-
-			console.log(data);
 
 			if (data.status !== 'success') {
 				throw new Error('Something goes wrong');
