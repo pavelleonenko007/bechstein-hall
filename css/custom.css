@@ -360,6 +360,10 @@ html {
 	margin-bottom: 0;
 }
 
+.booktickets-btn.min:has(+ *) {
+	margin-bottom: 14rem;
+}
+
 .booktickets-btn.sold-out {
 	pointer-events: none;
 }
