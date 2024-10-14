@@ -380,7 +380,7 @@ html {
 .white-z {
 	height: 10px;
 	top: max(100%, 100vh);
-  translate: 0 -100%;
+	translate: 0 -100%;
 }
 
 .grey-z.top-z {
@@ -547,8 +547,8 @@ html {
 }
 
 .cms-li_time-div .p-30-45 {
-	color: inherit;               /* Оставляем базовый цвет текста */
-  text-decoration: none;
+	color: inherit; /* Оставляем базовый цвет текста */
+	text-decoration: none;
 }
 
 .ui_alert-block a:after {
@@ -817,6 +817,17 @@ p strong {
 [type='radio']:checked + span {
 	border-color: rgba(3, 14, 20, 0.1);
 	background: #f1ead6;
+	color: #030E14;
+}
+
+.filter-flex-btn > [type='checkbox']:checked + span,
+.filter-flex-btn > [type='radio']:checked + span {
+	border-color: unset;
+	background: transparent;
+}
+
+.filter-flex-bg:has(+ input:checked) {
+	background: #f1ead6 !important;
 }
 
 .slider-wvwnts {
@@ -1152,11 +1163,11 @@ p strong {
 	.festival-column--relative {
 		top: 0;
 	}
-	
+
 	.slider-wvwnts_top-cats {
 		display: none;
 	}
-	
+
 	.head-event-content_in.home-slid {
 		height: 100%;
 	}
