@@ -321,6 +321,22 @@
 									);
 								}
 
+								if ( ! empty( $_GET['genres'] ) ) {
+									$tickets_query_args['tax_query'][] = array(
+										'taxonomy' => 'genres',
+										'field'    => 'slug',
+										'terms'    => $_GET['genres'],
+									);
+								}
+
+								if ( ! empty( $_GET['instruments'] ) ) {
+									$tickets_query_args['tax_query'][] = array(
+										'taxonomy' => 'instruments',
+										'field'    => 'slug',
+										'terms'    => $_GET['instruments'],
+									);
+								}
+
 								$tickets_query = new WP_Query( $tickets_query_args );
 
 								if ( $tickets_query->have_posts() ) :
