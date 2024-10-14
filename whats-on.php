@@ -312,6 +312,15 @@
 									);
 								}
 
+								if ( ! empty( $_GET['to'] ) ) {
+									$tickets_query_args['meta_query'][] = array(
+										'key'     => '_bechtix_ticket_start_date',
+										'value'   => sanitize_text_field( wp_unslash( $_GET['to'] ) ),
+										'compare' => '<=',
+										'type'    => 'DATE',
+									);
+								}
+
 								$tickets_query = new WP_Query( $tickets_query_args );
 
 								if ( $tickets_query->have_posts() ) :
