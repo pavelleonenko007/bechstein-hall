@@ -177,13 +177,14 @@ strong {
 
 .bech-slider {
 	width: 100%;
+	aspect-ratio: 2.01;
 	position: relative;
 	cursor: url('../images/book-tickets-cursor.svg'), auto;
 }
 
 .bech-slider__slides {
 	width: 100%;
-	height: 915rem;
+	height: 100%;
 	position: relative;
 }
 
@@ -205,6 +206,7 @@ strong {
 
 .bech-slider__slide .head-event-content {
 	height: 100%;
+	min-height: auto;
 	/*cursor: url("/wp-content/themes/bechstein/images/book-tickets-cursor.svg"), auto;*/
 }
 
@@ -1149,6 +1151,12 @@ p strong {
 	}
 }
 
+@media screen and (1920px > width >= 1440px) {
+	.bech-slider {
+		aspect-ratio: 1.5;
+	}
+}
+
 @media screen and (min-width: 1280px) {
 	.head-event-content {
 		min-height: calc(100vh - 146rem);
@@ -1160,6 +1168,11 @@ p strong {
 }
 
 @media screen and (max-width: 991px) {
+	.bech-slider {
+		aspect-ratio: auto;
+		height: calc(100vh - 100rem);
+	}
+	
 	.festival-column--relative {
 		top: 0;
 	}
