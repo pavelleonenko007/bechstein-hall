@@ -140,6 +140,88 @@ const initBurgerMenu = () => {
 	});
 };
 
+function animateCSS(element, styles, duration = 0, easing = (t) => t) {
+	const start = performance.now();
+	const initialStyles = {};
+	const endStyles = {};
+	let animationFrameId;
+	let isStopped = false;
+	let isPaused = false;
+	let pauseTime = 0;
+
+	for (const prop in styles) {
+		if (Object.hasOwnProperty.call(styles, prop)) {
+			const computedStyle = window.getComputedStyle(element);
+			initialStyles[prop] = computedStyle.getPropertyValue(prop);
+			endStyles[prop] = styles[prop];
+		}
+	}
+
+	function parseValue(value) {
+		const match = value.match(/^(-?\d*\.?\d+)(.*)$/);
+		return match
+			? { number: parseFloat(match[1]), unit: match[2] || '' }
+			: { number: 0, unit: '' };
+	}
+
+	function interpolate(start, end, progress) {
+		const startVal = parseValue(start.toString());
+		const endVal = parseValue(end.toString());
+
+		if (startVal.unit !== endVal.unit) {
+			console.warn(`Units don't match for property. Using end value's unit.`);
+		}
+
+		const value =
+			startVal.number + (endVal.number - startVal.number) * progress;
+		return `${value}${endVal.unit}`;
+	}
+
+	function frame(time) {
+		if (isStopped || isPaused) return;
+
+		const progress = easing(Math.min(1, (time - start - pauseTime) / duration));
+
+		for (const prop in endStyles) {
+			if (Object.hasOwnProperty.call(endStyles, prop)) {
+				element.style[prop] = interpolate(
+					initialStyles[prop],
+					endStyles[prop],
+					progress
+				);
+			}
+		}
+
+		if (progress < 1) {
+			animationFrameId = requestAnimationFrame(frame);
+		} else {
+			for (const prop in endStyles) {
+				if (Object.hasOwnProperty.call(endStyles, prop)) {
+					element.style[prop] = endStyles[prop].toString();
+				}
+			}
+		}
+	}
+
+	animationFrameId = requestAnimationFrame(frame);
+
+	return {
+		stop: () => {
+			isStopped = true;
+			cancelAnimationFrame(animationFrameId);
+		},
+		pause: () => {
+			isPaused = true;
+			pauseTime = performance.now() - start;
+		},
+		resume: () => {
+			isPaused = false;
+			start = performance.now() - pauseTime;
+			animationFrameId = requestAnimationFrame(frame);
+		},
+	};
+}
+
 function animate(element, styles = {}, duration, callback = () => {}) {
 	let startAnimation;
 	const currentStyles = {};
@@ -1593,6 +1675,16 @@ class BechCarouser {
 		this.slidesCurrentNumberNode = this.sliderNode.querySelector(
 			'[data-type="current"]'
 		);
+		this.buttonSVGLoader = this.nextButton.querySelector(
+			'.arrow-button__progress'
+		);
+
+		this.circumference =
+			2 * Math.PI * parseInt(this.buttonSVGLoader.getAttribute('r'));
+		this.buttonSVGLoader.style.strokeDasharray = `${this.circumference}px`;
+		this.buttonSVGLoader.style.strokeDashoffset =
+			this.getSVGLoaderOffsetByPercent(100);
+
 		this.slidesCountNode = this.sliderNode.querySelector('[data-type="count"]');
 		this.cursor = this.sliderNode.querySelector('[data-type="cursor"]');
 
@@ -1622,6 +1714,10 @@ class BechCarouser {
 		this.initDuration();
 	}
 
+	getSVGLoaderOffsetByPercent(percent) {
+		return this.circumference * ((100 - percent) / 100) + 'px';
+	}
+
 	get currentIndex() {
 		return this._currentIndex;
 	}
@@ -1647,10 +1743,10 @@ class BechCarouser {
 		this.slidesArray.forEach((slide, index) => {
 			if (index === this.currentIndex) {
 				slide.classList.add('bech-slider__slide--active');
-				animate(slide, { opacity: 1 }, this.options.changingDuration);
+				animateCSS(slide, { opacity: 1 }, this.options.changingDuration);
 			} else {
 				slide.classList.remove('bech-slider__slide--active');
-				animate(slide, { opacity: 0 }, this.options.changingDuration);
+				animateCSS(slide, { opacity: 0 }, this.options.changingDuration);
 			}
 		});
 	}
@@ -1660,31 +1756,36 @@ class BechCarouser {
 			this.options.duration = 1000;
 		}
 
+		this.buttonSVGLoader.style.strokeDashoffset =
+			this.getSVGLoaderOffsetByPercent(100);
 		clearInterval(this.interval);
-		cancelAnimationFrame(this.animation);
+		if (this.animation) {
+			this.animation.stop();
+		}
 
-		this.animation = animate(
-			this.nextButton.querySelector('.arrow-button__progress'),
-			{ strokeDashoffset: 0 },
+		this.animation = animateCSS(
+			this.buttonSVGLoader,
+			{ 'stroke-dashoffset': this.getSVGLoaderOffsetByPercent(0) },
 			this.options.duration
 		);
 
 		this.interval = setInterval(() => {
-			this.nextButton.querySelector(
-				'.arrow-button__progress'
-			).style.strokeDashoffset = Math.PI * (24 * 2);
+			this.buttonSVGLoader.style.strokeDashoffset =
+				this.getSVGLoaderOffsetByPercent(100);
 			this.next();
-			this.animation = animate(
-				this.nextButton.querySelector('.arrow-button__progress'),
-				{ strokeDashoffset: 0 },
+			this.animation = animateCSS(
+				this.buttonSVGLoader,
+				{ 'stroke-dashoffset': this.getSVGLoaderOffsetByPercent(0) },
 				this.options.duration
 			);
 		}, this.options.duration);
 	}
 
 	hoverCallback(event) {
+		console.log('hover');
+
 		clearInterval(this.interval);
-		cancelAnimationFrame(this.animation);
+		this.animation.pause();
 	}
 
 	unhoverCallback(event) {
@@ -1984,7 +2085,7 @@ function initWhatsOnFilters3() {
 		});
 	});
 
-	const submitFormCallback = debounce(async function(event) {
+	const submitFormCallback = debounce(async function (event) {
 		if (abortController) {
 			abortController.abort();
 		}
@@ -2054,10 +2155,7 @@ function initWhatsOnFilters3() {
 			if (hasSelectedFilters) {
 				showPopupShowEventsButtons();
 			}
-			loadMoreTriggerNode.setAttribute(
-				'data-max-pages',
-				json.data.max_pages
-			);
+			loadMoreTriggerNode.setAttribute('data-max-pages', json.data.max_pages);
 		} catch (error) {
 			if (error.name === 'AbortError') {
 				console.log('Fetch aborted');

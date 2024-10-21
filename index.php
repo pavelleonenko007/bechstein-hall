@@ -91,9 +91,9 @@
 									←
 								</button>
 								<button type="button" class="bech-slider__arrow arrow-button" data-type="next">
-									<svg width="100%" height="100%" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-										<circle r="24" cx="24" cy="24" fill="transparent" stroke-dasharray="150.79" stroke-dashoffset="0"></circle>
-										<circle class="arrow-button__progress" r="24" cx="24" cy="24" fill="transparent" stroke-dasharray="150.79" stroke-dashoffset="0"></circle>
+									<svg width="50" height="50" viewBox="0 0 100 100" style="width: 100%; height: 100%;">
+										<circle r="50" cx="50" cy="50" fill="transparent"></circle>
+										<circle class="arrow-button__progress" r="50" cx="50" cy="50" fill="transparent"></circle>
 									</svg>
 									→
 								</button>
