@@ -45,6 +45,7 @@ Template name: History
 							</div>
 						</div>
 					</div>
+					<p data-w-id="3ad2e894-31d6-eb80-7483-d3d2a4d7ae2c" class="p-25-40 history-page">In 1889, Carl Bechstein’s piano firm from Berlin chose 40 Wigmore Street as the site for its London operations. They followed their London success by establishing in 1901 a concert hall at no. 36, originally known as Bechstein Hall. However, in 1916, during the surge of anti-German sentiment that accompanied the ongoing First World War, the property was confiscated and sold to Debenham’s for £56,500. The venue reopened the following year under a new name: Wigmore Hall.</p>
 				</section>
 			</div>
 			<div class="years-container last">
@@ -152,7 +153,7 @@ Template name: History
 						<div class="his-container lft">
 							<div class="his-left lft"></div>
 							<div class="his-right m691 m3">
-								<p data-w-id="78a61c88-637f-110c-6ea1-5d33e6624c67" class="p-20-35">In 1914 almost 100 of the men from the Brinsmead workforce were recruited into active service and in spring of 1917 the firm was forced to make parts for aircraft. This caused an obvious, and intense, pressure on the business until finally in spring 1921 John Brinsmead and Sons was declared insolvent.<br><br>In 1889, Carl Bechstein’s piano firm from Berlin chose 40 Wigmore Street as the site for its London operations. They followed their London success by establishing in 1901 a concert hall at no. 36, originally known as Bechstein Hall. However, in 1916, during the surge of anti-German sentiment that accompanied the ongoing First World War, the property was confiscated and sold to Debenham’s for £56,500. The venue reopened the following year under a new name: Wigmore Hall.<br></p>
+								<p data-w-id="78a61c88-637f-110c-6ea1-5d33e6624c67" class="p-20-35">In 1914 almost 100 of the men from the Brinsmead workforce were recruited into active service and in spring of 1917 the firm was forced to make parts for aircraft. This caused an obvious, and intense, pressure on the business until finally in spring 1921 John Brinsmead and Sons was declared insolvent.<br></p>
 								<div class="text-block-8" style="width: 100%; text-align: center;">Jessica Duchen</div>
 							</div>
 						</div>
