@@ -637,13 +637,21 @@ function bech_get_filtered_tickets() {
 		);
 	}
 
-	$html = '<p class="no-event-message">'. esc_html(NO_EVENTS_TEXT) . '</p>';
+	$html = '<p class="no-event-message">' . esc_html( NO_EVENTS_TEXT ) . '</p>';
 
 	$tickets_query_args = array(
-		'post_type' => 'tickets',
-		'orderby'   => 'meta_value',
-		'meta_key'  => '_bechtix_ticket_start_date',
-		'order'     => 'ASC',
+		'post_type'  => 'tickets',
+		'orderby'    => 'meta_value',
+		'meta_key'   => '_bechtix_ticket_start_date',
+		'order'      => 'ASC',
+		'meta_query' => array(
+			array(
+				'key'     => '_bechtix_ticket_start_date',
+				'value'   => current_time( 'Y-m-d H:i:s' ),
+				'compare' => '>=',
+				'type'    => 'DATETIME',
+			),
+		),
 	);
 
 	if ( isset( $_POST['genres'] ) ) {

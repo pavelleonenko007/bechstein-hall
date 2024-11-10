@@ -301,6 +301,14 @@
 									'orderby'   => 'meta_value',
 									'meta_key'  => '_bechtix_ticket_start_date',
 									'order'     => 'ASC',
+									'meta_query' => array(
+										array(
+											'key'     => '_bechtix_ticket_start_date',
+											'value'   => current_time( 'Y-m-d H:i:s' ),
+											'compare' => '>=',
+											'type'    => 'DATETIME',
+										),
+									),
 								);
 
 								if ( ! empty( $_GET['from'] ) ) {
