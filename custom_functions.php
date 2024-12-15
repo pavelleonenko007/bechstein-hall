@@ -1379,7 +1379,7 @@ function bech_default_og_image( $image ) {
 function bech_default_share_image( $image ) {
 	$home_url = get_home_url();
 	if ( ! $image || $image === 'default' ) { // twitter will pass an empty string for $image while
-		$image = "{$home_url}/wp-content/uploads/62bc3fe7d9cc61371f2615ec_rectangle252057-p-1080.png";
+		$image = "{$home_url}/wp-content/uploads/og_main.png";
 	}
 
 	return $image;
