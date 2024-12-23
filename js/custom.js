@@ -2061,6 +2061,7 @@ function initWhatsOnFilters3() {
 			'input:not([type="hidden"]):not([type="submit"])'
 		)
 	);
+	const searchInput = filterForm.querySelector('input[name="s"]');
 	const timeFilters = filters.filter((filter) => filter.name === 'time');
 	const pageNumberInput = filterForm.querySelector('[name="paged"]');
 	const clearFiltersButton = document.getElementById('clear');
@@ -2085,7 +2086,11 @@ function initWhatsOnFilters3() {
 		});
 	});
 
-	const submitFormCallback = debounce(async function (event) {
+	const handleSearchInput = debounce((event) => {
+		filterForm.dispatchEvent(new Event('change'));
+	}, 600);
+
+	const submitFormCallback = async function (event) {
 		if (abortController) {
 			abortController.abort();
 		}
@@ -2166,7 +2171,7 @@ function initWhatsOnFilters3() {
 		} finally {
 			abortController = null;
 		}
-	}, 500);
+	};
 
 	const clearFilters = (event) => {
 		event?.preventDefault();
@@ -2187,6 +2192,7 @@ function initWhatsOnFilters3() {
 
 		//close mobile filter popup
 	};
+
 	const showSelectedFilters = (selectedString = '') => {
 		const selectedBlock = document.getElementById('selected-filters');
 		const selectedTextBlock = selectedBlock?.querySelector(
@@ -2199,6 +2205,7 @@ function initWhatsOnFilters3() {
 		);
 		selectedTextBlock.textContent = selectedString;
 	};
+
 	const changeInputsHandler = (event) => {
 		pageNumberInput.value = 1;
 		submitFormCallback();
@@ -2288,6 +2295,8 @@ function initWhatsOnFilters3() {
 
 	filterForm.addEventListener('change', changeInputsHandler);
 	filterForm.addEventListener('submit', submitFormCallback);
+
+	searchInput.addEventListener('input', handleSearchInput);
 
 	clearFiltersButton.addEventListener('click', clearFilters);
 	clearPopupButtons.forEach((button) =>
