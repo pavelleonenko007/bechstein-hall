@@ -1377,9 +1377,15 @@ function bech_default_og_image( $image ) {
 	add_action( 'wpseo_twitter_image', 'bech_default_share_image' );
 	add_action( 'wpseo_opengraph_image', 'bech_default_share_image' );
 function bech_default_share_image( $image ) {
+	global $post;
+
 	$home_url = get_home_url();
 	if ( ! $image || $image === 'default' ) { // twitter will pass an empty string for $image while
-		$image = "{$home_url}/wp-content/uploads/og_main.png";
+		if ( is_singular( 'events' ) && ! empty( get_field( 'main_image', $post ) ) ) {
+			$image = wp_get_attachment_image_url( get_field( 'main_image', $post ), 'medium' );
+		} else {
+			$image = "{$home_url}/wp-content/uploads/og_main.png";
+		}
 	}
 
 	return $image;
@@ -1418,6 +1424,93 @@ function bech_format_email_link( string $email, string $subject = '' ): string {
 	}
 
 	return esc_url( $email_link );
+}
+
+add_action( 'wp_ajax_subscribe_to_newsletter', 'bech_subscribe_to_newsletter' );
+add_action( 'wp_ajax_nopriv_subscribe_to_newsletter', 'bech_subscribe_to_newsletter' );
+function bech_subscribe_to_newsletter() {
+	if ( ! isset( $_POST['subscribe_to_newsletter_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['subscribe_to_newsletter_nonce'] ) ), 'subscribe_to_newsletter' ) ) {
+		wp_send_json_error(
+			array(
+				'title' => 'Bad request',
+			),
+			400
+		);
+	}
+
+	if ( empty( $_POST['agreement'] ) ) {
+		wp_send_json_error(
+			array(
+				'title' => 'Agreement is required',
+			),
+			400
+		);
+	}
+
+	if ( empty( $_POST['email'] ) ) {
+		wp_send_json_error(
+			array(
+				'details' => 'Email is required',
+			),
+			400
+		);
+	}
+
+	if ( ! is_email( $_POST['email'] ) ) {
+		wp_send_json_error(
+			array(
+				'title' => 'Email is invalid',
+			),
+			400
+		);
+	}
+
+	$email = sanitize_email( wp_unslash( $_POST['email'] ) );
+
+	$api_key = get_field( 'mailchimp_api_key', 'option' ); // 53caa0df372201782b08a86b2b634eac-us14
+
+	if ( empty( $api_key ) ) {
+		wp_send_json_error(
+			array(
+				'title' => 'API key is required',
+			),
+			400
+		);
+	}
+
+	$list_id     = '8282349c41';
+	$data_center = substr( $api_key, strpos( $api_key, '-' ) + 1 );
+	$url         = 'https://' . $data_center . '.api.mailchimp.com/3.0/lists/' . $list_id . '/members?skip_merge_validation=true';
+	$data        = array(
+		'email_address' => $email,
+		'status'        => 'subscribed',
+	);
+
+	$response = wp_remote_post(
+		$url,
+		array(
+			'headers' => array(
+				'Authorization' => 'Basic ' . base64_encode( 'anystring:' . $api_key ),
+				'Content-Type'  => 'application/json',
+			),
+			'body'    => json_encode( $data ),
+		)
+	);
+
+	if ( is_wp_error( $response ) ) {
+		wp_send_json_error( 'Ошибка при подписке' );
+	}
+
+	$body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+	// curl -X POST \
+	// 'https://${dc}.api.mailchimp.com/3.0/lists/{list_id}/members?skip_merge_validation=true' \
+	// --user "anystring:${apikey}"' \
+	// -d '{"email_address":"","email_type":"","status":"subscribed","merge_fields":{},"interests":{},"language":"","vip":false,"location":{"latitude":0,"longitude":0},"marketing_permissions":[],"ip_signup":"","timestamp_signup":"","ip_opt":"","timestamp_opt":"","tags":[]}'
+
+	wp_send_json_success(
+		$body
+	);
 }
 
 function bech_dump( $data ) {
