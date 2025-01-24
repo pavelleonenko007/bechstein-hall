@@ -95,10 +95,46 @@ defined( 'ABSPATH' ) || exit; ?>
 									<?php endif; ?>
 								<?php endforeach; ?>
 							</div>
+						<?php elseif ( 'subscribe_form' === $column_element['acf_fc_layout'] ) : ?>
+							<form data-js-validate-form data-js-subscribe-form class="subscribe-form" novalidate>
+								<div class="subscribe-form__wrapper" data-js-subscribe-form-wrapper>
+									<h3 class="subscribe-form__heading">Subscribe to our newsletter</h3>
+									<div class="subscribe-form__body">
+										<div class="bech-field">
+											<input 
+												type="email" 
+												name="email" 
+												class="bech-field__control"
+												placeholder="Your email"
+												pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+												title="Please enter a valid email address."
+												required
+											>
+											<span class="bech-field__errors" data-js-validate-form-field-errors></span>
+										</div>
+										<button class="subscribe-form__button">→</button>
+									</div>
+									<label class="bech-field bech-checkbox">
+										<input 
+											type="checkbox" 
+											name="agreement" 
+											value="agree" 
+											class="bech-checkbox__control" 
+											required
+										>
+										<span class="bech-checkbox__label">
+										I agree to the website’s <a href="<?php echo esc_url( get_privacy_policy_url() ); ?>">Privacy Policy</a>
+										</span>
+									</label>
+								</div>
+								<div class="subscribe-form__success" data-js-subscribe-form-global-message></div>
+								<input type="hidden" name="action" value="subscribe_to_newsletter">
+								<?php wp_nonce_field( 'subscribe_to_newsletter', 'subscribe_to_newsletter_nonce' ); ?>
+							</form>
 						<?php endif; ?>
-					<?php endforeach; ?>
+						<?php endforeach; ?>
 				</div>
-			<?php endforeach; ?>
+						<?php endforeach; ?>
 		</div>
 		<div class="footer-container bottom">
 			<div class="footer-col _1">
@@ -119,12 +155,12 @@ defined( 'ABSPATH' ) || exit; ?>
 						London, W1U 2RH, 22 Wigmore Street
 					</div>
 				</div>
-				<?php
-				$social_links = get_field( 'social_links', 'option' );
-				if ( ! empty( $social_links ) ) :
-					?>
+						<?php
+						$social_links = get_field( 'social_links', 'option' );
+						if ( ! empty( $social_links ) ) :
+							?>
 					<div class="foo-soc-line">
-						<?php if ( ! empty( $social_links['youtube'] ) ) : ?>
+								<?php if ( ! empty( $social_links['youtube'] ) ) : ?>
 							<a href="<?php echo esc_url( $social_links['youtube'] ); ?>" class="link-soc w-inline-block" target="_blank">
 								<div class="soc-icon w-embed">
 									<svg class="ico-yt" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -141,7 +177,7 @@ defined( 'ABSPATH' ) || exit; ?>
 								</div>
 							</a>
 						<?php endif; ?>
-						<?php if ( ! empty( $social_links['instagram'] ) ) : ?>
+							<?php if ( ! empty( $social_links['instagram'] ) ) : ?>
 							<a href="<?php echo esc_url( $social_links['instagram'] ); ?>" class="link-soc w-inline-block" target="_blank">
 								<div class="soc-icon w-embed">
 									<svg class="ico-in" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -158,7 +194,7 @@ defined( 'ABSPATH' ) || exit; ?>
 								</div>
 							</a>
 						<?php endif; ?>
-						<?php if ( ! empty( $social_links['twitter'] ) ) : ?>
+							<?php if ( ! empty( $social_links['twitter'] ) ) : ?>
 							<a href="<?php echo esc_url( $social_links['twitter'] ); ?>" class="link-soc w-inline-block" target="_blank">
 								<div class="soc-icon w-embed">
 									<svg class="ico-tw" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -175,7 +211,7 @@ defined( 'ABSPATH' ) || exit; ?>
 								</div>
 							</a>
 						<?php endif; ?>
-						<?php if ( ! empty( $social_links['facebook'] ) ) : ?>
+							<?php if ( ! empty( $social_links['facebook'] ) ) : ?>
 							<a href="<?php echo esc_url( $social_links['facebook'] ); ?>" class="link-soc w-inline-block" target="_blank">
 								<div class="soc-icon w-embed">
 									<svg class="ico-fb" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -193,23 +229,23 @@ defined( 'ABSPATH' ) || exit; ?>
 							</a>
 						<?php endif; ?>
 					</div>
-				<?php endif; ?>
+						<?php endif; ?>
 			</div>
 			<div class="footer-col no-mob">
 				<div class="foo-bottom nz">
 					<a href="#" data-href="#moove_gdpr_cookie_modal" class="link-foo-small _2">Manage Consents</a>
-					<?php
-					$terms_page = get_post( TERMS_OF_USE_PAGE_ID );
-					if ( $terms_page ) :
-						?>
+						<?php
+						$terms_page = get_post( TERMS_OF_USE_PAGE_ID );
+						if ( $terms_page ) :
+							?>
 						<a href="<?php echo esc_url( get_the_permalink( $terms_page ) ); ?>" class="link-foo-small _2"><?php echo esc_html( get_the_title( $terms_page ) ); ?></a>
-					<?php endif; ?>
-					<?php
-					$policy_page = get_post( PRIVACY_POLICY_PAGE_ID );
-					if ( $policy_page ) :
-						?>
+						<?php endif; ?>
+						<?php
+						$policy_page = get_post( PRIVACY_POLICY_PAGE_ID );
+						if ( $policy_page ) :
+							?>
 						<a href="<?php echo esc_url( get_the_permalink( $policy_page ) ); ?>" class="link-foo-small last"><?php echo esc_html( get_the_title( $policy_page ) ); ?></a>
-					<?php endif; ?>
+						<?php endif; ?>
 				</div>
 			</div>
 			<div class="footer-col _3">
@@ -220,10 +256,10 @@ defined( 'ABSPATH' ) || exit; ?>
 			</div>
 		</div>
 	</div>
-	<?php
-	$team_page = bech_get_page_by_slug( 'team' );
-	if ( ! $team_page ) :
-		?>
+						<?php
+						$team_page = bech_get_page_by_slug( 'team' );
+						if ( ! $team_page ) :
+							?>
 		<div class="white-z"></div>
-	<?php endif; ?>
+						<?php endif; ?>
 </footer>

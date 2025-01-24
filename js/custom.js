@@ -1,3 +1,292 @@
+class FormsValidation {
+	selectors = {
+		form: '[data-js-validate-form]',
+		fieldErrors: '[data-js-validate-form-field-errors]',
+	};
+
+	errorMessages = {
+		valueMissing: () => 'Please, fill the field',
+		patternMismatch: ({ title }) =>
+			title || 'The data does not match the format',
+		tooShort: ({ minLength }) =>
+			`The value is too short, with a minimum of ${minLength} characters`,
+		tooLong: ({ maxLength }) =>
+			`The value is too short, with a minimum of ${maxLength} characters`,
+	};
+
+	constructor() {}
+
+	init() {
+		this.bindEvents();
+
+		return Promise.resolve();
+	}
+
+	manageErrors(fieldControlElement, errorMessages) {
+		const fieldErrorsElement = fieldControlElement.parentElement.querySelector(
+			this.selectors.fieldErrors
+		);
+
+		if (fieldErrorsElement) {
+			fieldErrorsElement.innerHTML = errorMessages
+				.map((message) => `<span class="bech-field__error">${message}</span>`)
+				.join('');
+		}
+	}
+
+	validateField(fieldControlElement) {
+		const errors = fieldControlElement.validity;
+		const errorMessages = [];
+
+		Object.entries(this.errorMessages).forEach(
+			([errorType, getErrorMessage]) => {
+				if (errors[errorType]) {
+					errorMessages.push(getErrorMessage(fieldControlElement));
+				}
+			}
+		);
+
+		this.manageErrors(fieldControlElement, errorMessages);
+
+		const isValid = errorMessages.length === 0;
+
+		fieldControlElement.ariaInvalid = !isValid;
+
+		return isValid;
+	}
+
+	onBlur(event) {
+		const { target } = event;
+		const isFormField = target.closest(this.selectors.form);
+		const isRequired = target.required;
+
+		if (isFormField && isRequired) {
+			this.validateField(target);
+		}
+	}
+
+	onChange(event) {
+		const { target } = event;
+		const isRequired = target.required;
+		const isToggleType = ['radio', 'checkbox'].includes(target.type);
+
+		if (isToggleType && isRequired) {
+			this.validateField(target);
+		}
+	}
+
+	onSubmit(event) {
+		const isFormElement = event.target.matches(this.selectors.form);
+		if (!isFormElement) {
+			return;
+		}
+
+		const requiredControlElements = [...event.target.elements].filter(
+			({ required }) => required
+		);
+		let isFormValid = true;
+		let firstInvalidFieldControl = null;
+
+		requiredControlElements.forEach((element) => {
+			const isFieldValid = this.validateField(element);
+
+			if (!isFieldValid) {
+				isFormValid = false;
+
+				if (!firstInvalidFieldControl) {
+					firstInvalidFieldControl = element;
+				}
+			}
+		});
+
+		if (!isFormValid) {
+			console.log('invalid ebaniy');
+
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			firstInvalidFieldControl.focus();
+			return;
+		}
+	}
+
+	bindEvents() {
+		document.addEventListener(
+			'blur',
+			(event) => {
+				this.onBlur(event);
+			},
+			{ capture: true }
+		);
+		document.addEventListener('change', (event) => this.onChange(event));
+		document.addEventListener('submit', (event) => this.onSubmit(event));
+	}
+}
+
+class SubscribeForm {
+	selectors = {
+		form: '[data-js-subscribe-form]',
+		formWrapperElement: '[data-js-subscribe-form-wrapper]',
+		formGlobalMessageElement: '[data-js-subscribe-form-global-message]',
+		errorMessagesElement: '[data-js-validate-form-field-errors]',
+	};
+
+	stateSelector = {
+		isLoading: 'is-loading',
+		isInvalid: 'is-invalid',
+	};
+
+	constructor(formElement) {
+		console.log('SubscribeForm');
+
+		this.formElement = formElement;
+
+		this.submitHandler = this.submitHandler.bind(this);
+
+		this.bindEvents();
+	}
+
+	clearErrors() {
+		this.formElement
+			.querySelectorAll('[aria-invalid="true"]')
+			.forEach((field) => {
+				this.clearErrorsForField(field);
+			});
+	}
+
+	showErrors(errors) {
+		let firstInvalidField = null;
+
+		for (const [fieldName, errorMessages] of Object.entries(errors)) {
+			const field = this.formElement.querySelector(`[name="${fieldName}"]`);
+			const errorMessagesElement = field.parentElement.querySelector(
+				this.selectors.errorMessagesElement
+			);
+
+			if (errorMessagesElement) {
+				errorMessagesElement.innerHTML = errorMessages
+					.map((message) => `<span class="bech-field__error">${message}</span>`)
+					.join('');
+			}
+
+			field.ariaInvalid = true;
+
+			if (firstInvalidField) {
+				firstInvalidField = field;
+				field.focus();
+			}
+		}
+	}
+
+	clearErrorsForField(field) {
+		field.ariaInvalid = false;
+
+		const errorMessagesElement = field.parentElement.querySelector(
+			this.selectors.errorMessagesElement
+		);
+
+		if (errorMessagesElement) {
+			errorMessagesElement.innerHTML = '';
+		}
+	}
+
+	showSuccess(successMessage) {
+		this.formElement.querySelector(
+			this.selectors.formWrapperElement
+		).hidden = true;
+
+		this.formElement.querySelector(
+			this.selectors.formGlobalMessageElement
+		).innerHTML = `<p>${successMessage}</p>`;
+		this.formElement
+			.querySelector(this.selectors.formGlobalMessageElement)
+			.classList.remove(this.stateSelector.isInvalid);
+	}
+
+	showGlobalError(errorMessage) {
+		this.formElement.querySelector(
+			this.selectors.formWrapperElement
+		).hidden = true;
+
+		this.formElement.querySelector(
+			this.selectors.formGlobalMessageElement
+		).innerHTML = `<p>${errorMessage}</p>`;
+		this.formElement
+			.querySelector(this.selectors.formGlobalMessageElement)
+			.classList.add(this.stateSelector.isInvalid);
+	}
+
+	async submitHandler(event) {
+		event.preventDefault();
+		console.log('Submit haha mne pohoy');
+
+		if (this.formElement.classList.contains(this.stateSelector.isLoading)) {
+			return;
+		}
+
+		if (this.formElement.querySelectorAll('[aria-invalid="true"]').length > 0) {
+			return;
+		}
+
+		this.formElement.classList.add(this.stateSelector.isLoading);
+
+		this.clearErrors();
+
+		try {
+			const formData = new FormData(this.formElement);
+
+			const response = await fetch(bech_var.url, {
+				method: 'POST',
+				body: formData,
+			});
+
+			const { success, data } = await response.json();
+
+			if (!success) {
+				if (data.errors) {
+					this.showErrors(data.errors);
+					return;
+				} else {
+					throw new Error(
+						data.detail || 'Something went wrong. Please, try again later!'
+					);
+				}
+			}
+
+			console.log({ success, data });
+
+			this.formElement.reset();
+			this.showSuccess(data.message);
+		} catch (error) {
+			console.error(error);
+			this.showGlobalError(error.message);
+		} finally {
+			this.formElement.classList.remove(this.stateSelector.isLoading);
+		}
+	}
+
+	bindEvents() {
+		document.addEventListener('submit', this.submitHandler);
+	}
+}
+
+class SubscribeFormCollection {
+	constructor() {
+		this.init();
+	}
+
+	init() {
+		document.querySelectorAll('[data-js-subscribe-form]').forEach((form) => {
+			new SubscribeForm(form);
+		});
+	}
+}
+
+const formValidator = new FormsValidation();
+
+formValidator.init().then(() => {
+	new SubscribeFormCollection();
+});
+
 const mediaQuery = window.matchMedia('screen and (min-width: 992px)');
 
 function isSafariBrowser() {

@@ -1432,47 +1432,42 @@ function bech_subscribe_to_newsletter() {
 	if ( ! isset( $_POST['subscribe_to_newsletter_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['subscribe_to_newsletter_nonce'] ) ), 'subscribe_to_newsletter' ) ) {
 		wp_send_json_error(
 			array(
-				'title' => 'Bad request',
+				'detail' => 'Bad request',
 			),
 			400
 		);
 	}
 
+	$errors = array();
+
 	if ( empty( $_POST['agreement'] ) ) {
-		wp_send_json_error(
-			array(
-				'title' => 'Agreement is required',
-			),
-			400
-		);
+		$errors['agreement'] = 'Agreement is required';
 	}
 
 	if ( empty( $_POST['email'] ) ) {
-		wp_send_json_error(
-			array(
-				'details' => 'Email is required',
-			),
-			400
-		);
-	}
-
-	if ( ! is_email( $_POST['email'] ) ) {
-		wp_send_json_error(
-			array(
-				'title' => 'Email is invalid',
-			),
-			400
-		);
+		$errors['email'] = 'Email is required';
 	}
 
 	$email = sanitize_email( wp_unslash( $_POST['email'] ) );
+
+	if ( ! is_email( $email ) ) {
+		$errors['email'] = 'Email is invalid';
+	}
+
+	if ( ! empty( $errors ) ) {
+		wp_send_json_error(
+			array(
+				'errors' => $errors,
+			)
+		);
+	}
 
 	$api_key = get_field( 'mailchimp_api_key', 'option' ); // 53caa0df372201782b08a86b2b634eac-us14
 
 	if ( empty( $api_key ) ) {
 		wp_send_json_error(
 			array(
-				'title' => 'API key is required',
+				'detail' => 'API key is required',
 			),
 			400
 		);
@@ -1498,7 +1493,7 @@ function bech_subscribe_to_newsletter() {
 	);
 
 	if ( is_wp_error( $response ) ) {
-		wp_send_json_error( 'Ошибка при подписке' );
+		wp_send_json_error( array( 'detail' => 'Something went wrong. Please, try agail later!' ), 400 );
 	}
 
 	$body = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -1507,6 +1502,12 @@ function bech_subscribe_to_newsletter() {
 	// 'https://${dc}.api.mailchimp.com/3.0/lists/{list_id}/members?skip_merge_validation=true' \
 	// --user "anystring:${apikey}"' \
 	// -d '{"email_address":"","email_type":"","status":"subscribed","merge_fields":{},"interests":{},"language":"","vip":false,"location":{"latitude":0,"longitude":0},"marketing_permissions":[],"ip_signup":"","timestamp_signup":"","ip_opt":"","timestamp_opt":"","tags":[]}'
+
+	if ( 300 >= $body->status ) {
+		wp_send_json_error(
+			$body
+		);
+	}
 
 	wp_send_json_success(
 		$body

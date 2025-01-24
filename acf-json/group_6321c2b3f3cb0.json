@@ -397,6 +397,15 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_6792ad06ec39b": {
+                            "key": "layout_6792ad06ec39b",
+                            "name": "subscribe_form",
+                            "label": "Subscribe Form",
+                            "display": "block",
+                            "sub_fields": [],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "min": "",
@@ -669,6 +678,43 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_679361a9fc497",
+            "label": "Other",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_679361b4fc498",
+            "label": "Mailchimp API key",
+            "name": "mailchimp_api_key",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -689,5 +735,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1727955042
+    "modified": 1737712077
 }
