@@ -1462,7 +1462,7 @@ function bech_subscribe_to_newsletter() {
 		);
 	}
 
-	$api_key = get_field( 'mailchimp_api_key', 'option' ); // 53caa0df372201782b08a86b2b634eac-us14
+	$api_key = get_field( 'mailchimp_api_key', 'option' );
 
 	if ( empty( $api_key ) ) {
 		wp_send_json_error(
