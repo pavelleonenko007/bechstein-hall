@@ -100,8 +100,6 @@ class FormsValidation {
 		});
 
 		if (!isFormValid) {
-			console.log('invalid ebaniy');
-
 			event.preventDefault();
 			event.stopImmediatePropagation();
 			firstInvalidFieldControl.focus();
@@ -136,8 +134,6 @@ class SubscribeForm {
 	};
 
 	constructor(formElement) {
-		console.log('SubscribeForm');
-
 		this.formElement = formElement;
 
 		this.submitHandler = this.submitHandler.bind(this);
@@ -216,8 +212,11 @@ class SubscribeForm {
 	}
 
 	async submitHandler(event) {
+		if (event.target !== this.formElement) {
+			return;
+		}
+		
 		event.preventDefault();
-		console.log('Submit haha mne pohoy');
 
 		if (this.formElement.classList.contains(this.stateSelector.isLoading)) {
 			return;
