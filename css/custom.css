@@ -129,6 +129,8 @@
 .bech-checkbox__label {
 	text-transform: uppercase;
 	background-color: transparent !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .bech-checkbox__label a {
