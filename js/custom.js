@@ -70,7 +70,7 @@ class FormsValidation {
 		const isRequired = target.required;
 		const isToggleType = ['radio', 'checkbox'].includes(target.type);
 
-		if (isToggleType && isRequired) {
+		if (isRequired) {
 			this.validateField(target);
 		}
 	}
@@ -108,13 +108,13 @@ class FormsValidation {
 	}
 
 	bindEvents() {
-		document.addEventListener(
-			'blur',
-			(event) => {
-				this.onBlur(event);
-			},
-			{ capture: true }
-		);
+		// document.addEventListener(
+		// 	'blur',
+		// 	(event) => {
+		// 		this.onBlur(event);
+		// 	},
+		// 	{ capture: true }
+		// );
 		document.addEventListener('change', (event) => this.onChange(event));
 		document.addEventListener('submit', (event) => this.onSubmit(event));
 	}
