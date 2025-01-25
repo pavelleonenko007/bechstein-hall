@@ -195,7 +195,7 @@
 	--left: 484rem;
 
 	width: calc(100% - var(--left));
-	max-width: 1220rem;
+	max-width: min(62%, 1220rem);
 	aspect-ratio: 2.5 / 1;
 	/* height: 323rem; */
 	border-top-right-radius: 1000rem;
