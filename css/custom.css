@@ -159,7 +159,6 @@
 
 .section-subscribe__inner {
 	width: 100%;
-	max-width: 910rem;
 	display: flex;
 	flex-direction: column;
 	row-gap: 50rem;
@@ -168,6 +167,7 @@
 }
 
 .section-subscribe__content {
+	max-width: 910rem;
 	position: relative;
 	z-index: 2;
 }
@@ -211,15 +211,14 @@
 .section-subscribe__decoration {
 	--left: 484rem;
 
-	width: calc(100% - var(--left));
-	max-width: min(59%, 1220rem);
+	width: 100%;
+	max-width: min(calc(100% - var(--left)), 1220rem);
 	aspect-ratio: 2.5 / 1;
-	/* height: 323rem; */
+	height: 100%;
 	border-top-right-radius: 1000rem;
 	border-bottom-right-radius: 1000rem;
 	position: absolute;
-	top: 75rem;
-	left: 484rem;
+	left: var(--left);
 	background-size: cover;
 	background-position: 50% 50%;
 	z-index: 1;

@@ -295,8 +295,8 @@
 						<input type="hidden" name="action" value="subscribe_to_newsletter">
 						<?php wp_nonce_field( 'subscribe_to_newsletter', 'subscribe_to_newsletter_nonce' ); ?>
 					</form>
+					<div class="section-subscribe__decoration" style="background-image: url('<?php echo wp_get_attachment_image_url( 62, 'full' ); ?>');"></div>
 				</div>
-				<div class="section-subscribe__decoration" style="background-image: url('<?php echo wp_get_attachment_image_url( 62, 'full' ); ?>');"></div>
 			</section>
 			<?php
 			$infinite_carousel = $about_bechstein_hall_block['infinite_carousel'];
