@@ -254,7 +254,7 @@
 				</div>
 				<div class="white-z"></div>
 			</section>
-			<section class="section section-subscribe">
+			<section class="section section-subscribe" style="display: none;">
 				<div class="section-subscribe__inner">
 					<div class="section-subscribe__content">
 						<h2 class="section-subscribe__heading">Stay In Tune</h2>
