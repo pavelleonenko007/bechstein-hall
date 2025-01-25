@@ -33,7 +33,6 @@
 
 .subscribe-form__button:hover,
 .subscribe-form__button:focus-visible {
-	opacity: 0.6;
 	color: #b0935b;
 }
 
