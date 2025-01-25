@@ -137,6 +137,93 @@
 	color: #b0935b;
 }
 
+.section-subscribe {
+	margin-top: 100rem;
+	padding: 75rem 100rem;
+	background-color: #030e14;
+	color: #fff;
+}
+
+@media (max-width: 991px) {
+	.section-subscribe {
+		padding-inline: 30rem;
+	}
+}
+
+.section-subscribe__inner {
+	width: 100%;
+	max-width: 600rem;
+	display: flex;
+	flex-direction: column;
+	row-gap: 50rem;
+	position: relative;
+	z-index: 2;
+}
+
+.section-subscribe__content {
+	position: relative;
+	z-index: 2;
+}
+
+.section-subscribe__heading {
+	margin: 0;
+	margin-top: 54rem;
+	font-family: Pphatton, sans-serif;
+	font-size: 75rem;
+	line-height: 1.1;
+	font-weight: 500;
+}
+
+.section-subscribe__description {
+	margin-top: 10rem;
+	font-size: 20rem;
+	line-height: 1.5;
+}
+
+.section-subscribe__decoration {
+	width: 800rem;
+	height: 323rem;
+	border-top-right-radius: 1000rem;
+	border-bottom-right-radius: 1000rem;
+	position: absolute;
+	top: 0;
+	left: 290rem;
+	background-size: cover;
+	background-position: 50% 50%;
+	z-index: 1;
+}
+
+@media (max-width: 991px) {
+	.section-subscribe__decoration {
+		display: none;
+	}
+}
+
+.section-subscribe__form {
+	max-width: 270rem;
+	position: relative;
+	z-index: 2;
+}
+
+@media (max-width: 991px) {
+	.section-subscribe__form {
+		max-width: unset;
+	}
+}
+
+.section-subscribe__form .bech-checkbox__control,
+.section-subscribe__form .bech-field__control {
+	border-color: #fff;
+}
+
+.section-subscribe__form .bech-checkbox__control:checked {
+	border-color: #b0935b;
+}
+
+.section-subscribe__form .bech-checkbox__label {
+	color: inherit !important;
+}
+
 b,
 strong {
 	-moz-osx-font-smoothing: grayscale; /* Firefox */
