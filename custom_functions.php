@@ -1467,7 +1467,8 @@ function bech_subscribe_to_newsletter() {
 	if ( empty( $api_key ) ) {
 		wp_send_json_error(
 			array(
-				'detail' => 'API key is required',
+				'detail' => 'Unable to process your request. Please try again later.',
+				'debug'  => 'API key is required',
 			),
 			400
 		);
@@ -1488,7 +1489,7 @@ function bech_subscribe_to_newsletter() {
 				'Authorization' => 'Basic ' . base64_encode( 'anystring:' . $api_key ),
 				'Content-Type'  => 'application/json',
 			),
-			'body'    => json_encode( $data ),
+			'body'    => wp_json_encode( $data ),
 		)
 	);
 
@@ -1496,21 +1497,63 @@ function bech_subscribe_to_newsletter() {
 		wp_send_json_error( array( 'detail' => 'Something went wrong. Please, try agail later!' ), 400 );
 	}
 
-	$body = json_decode( wp_remote_retrieve_body( $response ), true );
+	$body        = json_decode( wp_remote_retrieve_body( $response ), true );
+	$status_code = wp_remote_retrieve_response_code( $response );
 
 	// curl -X POST \
 	// 'https://${dc}.api.mailchimp.com/3.0/lists/{list_id}/members?skip_merge_validation=true' \
 	// --user "anystring:${apikey}"' \
 	// -d '{"email_address":"","email_type":"","status":"subscribed","merge_fields":{},"interests":{},"language":"","vip":false,"location":{"latitude":0,"longitude":0},"marketing_permissions":[],"ip_signup":"","timestamp_signup":"","ip_opt":"","timestamp_opt":"","tags":[]}'
 
-	if ( 300 >= $body->status ) {
-		wp_send_json_error(
-			$body
-		);
+	switch ( $status_code ) {
+		case 200:
+			if ( isset( $body['status'] ) && 'subscribed' === $body['status'] ) {
+					wp_send_json_success(
+						array(
+							'detail' => 'Thanks for joining us!<br> Look out for exciting updates in your inbox soon.',
+							'data'   => $body,
+						),
+						201
+					);
+			}
+			break;
+
+		case 400:
+			if ( isset( $body['title'] ) && 'Member Exists' === $body['title'] ) {
+					wp_send_json_error(
+						array(
+							'detail' => 'This email is already subscribed to our newsletter.',
+						),
+						400
+					);
+			}
+			break;
+
+		case 401:
+				wp_send_json_error(
+					array(
+						'detail' => 'Authentication failed. Please try again later.',
+					),
+					401
+				);
+			break;
+
+		default:
+				wp_send_json_error(
+					array(
+						'detail' => 'An unexpected error occurred. Please try again later.',
+						'debug'  => $body,
+					),
+					$status_code
+				);
 	}
 
-	wp_send_json_success(
-		$body
+	// // Fallback error response
+	wp_send_json_error(
+		array(
+			'detail' => 'Unable to process your request. Please try again later.',
+		),
+		400
 	);
 }
 

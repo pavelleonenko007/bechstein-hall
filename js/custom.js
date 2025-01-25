@@ -215,7 +215,7 @@ class SubscribeForm {
 		if (event.target !== this.formElement) {
 			return;
 		}
-		
+
 		event.preventDefault();
 
 		if (this.formElement.classList.contains(this.stateSelector.isLoading)) {
@@ -239,22 +239,22 @@ class SubscribeForm {
 			});
 
 			const { success, data } = await response.json();
+			// const body = await response.json();
 
 			if (!success) {
 				if (data.errors) {
 					this.showErrors(data.errors);
 					return;
 				} else {
+					console.error(data.debug);
 					throw new Error(
 						data.detail || 'Something went wrong. Please, try again later!'
 					);
 				}
 			}
 
-			console.log({ success, data });
-
 			this.formElement.reset();
-			this.showSuccess(data.message);
+			this.showSuccess(data.detail);
 		} catch (error) {
 			console.error(error);
 			this.showGlobalError(error.message);

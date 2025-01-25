@@ -37,10 +37,9 @@
 
 .subscribe-form__success {
 	margin: 0;
-	font-size: 15rem;
-	line-height: 1.35;
+	font-size: 13rem;
+	line-height: 2.5;
 	font-weight: 500;
-	text-transform: uppercase;
 }
 
 .subscribe-form__success.is-invalid {
