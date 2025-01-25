@@ -181,12 +181,31 @@
 	font-weight: 500;
 }
 
+@media (max-width: 991px) {
+	.section-subscribe__heading {
+		margin-top: 42rem;
+		font-size: 75rem;
+	}
+}
+
+@media (max-width: 479px) {
+	.section-subscribe__heading {
+		font-size: 40rem;
+	}
+}
+
 .section-subscribe__description {
 	margin: 0;
 	margin-top: 10rem;
 	font-size: 30rem;
 	line-height: 1.5;
 	font-weight: 500;
+}
+
+@media (max-width: 991px) {
+	.section-subscribe__description {
+		font-size: 20rem;
+	}
 }
 
 .section-subscribe__decoration {
@@ -232,6 +251,12 @@
 
 .section-subscribe__form .subscribe-form__heading {
 	font-size: 20rem;
+}
+
+@media (max-width: 991px) {
+	.section-subscribe__form .subscribe-form__heading {
+		font-size: 18rem;
+	}
 }
 
 .section-subscribe__form .bech-field__control {
