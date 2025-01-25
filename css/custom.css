@@ -209,16 +209,17 @@
 }
 
 .section-subscribe__decoration {
-	--left: 484rem;
+	--left: 370rem;
 
 	width: 100%;
 	max-width: min(calc(100% - var(--left)), 1220rem);
 	aspect-ratio: 2.5 / 1;
-	height: 100%;
+	height: calc(100% + 20rem);
 	border-top-right-radius: 1000rem;
 	border-bottom-right-radius: 1000rem;
 	position: absolute;
 	left: var(--left);
+	bottom: 0;
 	background-size: cover;
 	background-position: 50% 50%;
 	z-index: 1;
