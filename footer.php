@@ -106,7 +106,7 @@ defined( 'ABSPATH' ) || exit; ?>
 												name="email" 
 												class="bech-field__control"
 												placeholder="Your email"
-												pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+												pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}"
 												title="Please enter a valid email address."
 												required
 											>
