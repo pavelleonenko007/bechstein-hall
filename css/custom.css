@@ -27,7 +27,8 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: transparent;
+	height: 27rem;
+	background-color: #f5f5f0;
 }
 
 .subscribe-form__button:hover,
@@ -255,6 +256,10 @@
 
 .section-subscribe__form .bech-checkbox__label {
 	color: inherit !important;
+}
+
+.section-subscribe__form .subscribe-form__button {
+	background-color: transparent;
 }
 
 b,
