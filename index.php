@@ -254,50 +254,61 @@
 				</div>
 				<div class="white-z"></div>
 			</section>
-			<section class="section section-subscribe" style="display: none;">
-				<div class="section-subscribe__inner">
-					<div class="section-subscribe__content">
-						<h2 class="section-subscribe__heading">Stay In Tune</h2>
-						<p class="section-subscribe__description">Be the first to know about our upcoming concerts, exclusive events, and special offers. Let the music come to you!</p>
-					</div>
-					<form data-js-validate-form data-js-subscribe-form class="section-subscribe__form subscribe-form" novalidate>
-						<div class="subscribe-form__wrapper" data-js-subscribe-form-wrapper>
-							<h3 class="subscribe-form__heading">Subscribe to our newsletter</h3>
-							<div class="subscribe-form__body">
-								<div class="bech-field">
+			<?php
+			$subscribe_form = get_field( 'subscribe_form', 'option' );
+			if ( ! empty( $subscribe_form['heading'] ) ) :
+				?>
+				<section class="section section-subscribe"<?php echo empty( $subscribe_form['form_display'] ) || false === $subscribe_form['form_display'] ? ' hidden' : ''; ?>>
+					<div class="section-subscribe__inner">
+						<div class="section-subscribe__content">
+							<h2 class="section-subscribe__heading"><?php echo esc_html( $subscribe_form['heading'] ); ?></h2>
+							<?php if ( ! empty( $subscribe_form['description'] ) ) : ?>
+								<div class="section-subscribe__description">
+									<?php echo wp_kses_post( $subscribe_form['description'] ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+						<form data-js-validate-form data-js-subscribe-form class="section-subscribe__form subscribe-form" novalidate>
+							<div class="subscribe-form__wrapper" data-js-subscribe-form-wrapper>
+								<h3 class="subscribe-form__heading">Subscribe to our newsletter</h3>
+								<div class="subscribe-form__body">
+									<div class="bech-field">
+										<input 
+											type="email" 
+											name="email" 
+											class="bech-field__control"
+											placeholder="Your email"
+											pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}"
+											title="Please enter a valid email address."
+											required
+										>
+										<span class="bech-field__errors" data-js-validate-form-field-errors></span>
+									</div>
+									<button class="subscribe-form__button">→</button>
+								</div>
+								<label class="bech-field bech-checkbox">
 									<input 
-										type="email" 
-										name="email" 
-										class="bech-field__control"
-										placeholder="Your email"
-										pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}"
-										title="Please enter a valid email address."
+										type="checkbox" 
+										name="agreement" 
+										value="agree" 
+										class="bech-checkbox__control" 
 										required
 									>
-									<span class="bech-field__errors" data-js-validate-form-field-errors></span>
-								</div>
-								<button class="subscribe-form__button">→</button>
+									<span class="bech-checkbox__label">
+									I agree to the website’s <a href="<?php echo esc_url( get_privacy_policy_url() ); ?>">Privacy Policy</a>
+									</span>
+								</label>
 							</div>
-							<label class="bech-field bech-checkbox">
-								<input 
-									type="checkbox" 
-									name="agreement" 
-									value="agree" 
-									class="bech-checkbox__control" 
-									required
-								>
-								<span class="bech-checkbox__label">
-								I agree to the website’s <a href="<?php echo esc_url( get_privacy_policy_url() ); ?>">Privacy Policy</a>
-								</span>
-							</label>
-						</div>
-						<div class="subscribe-form__success" data-js-subscribe-form-global-message></div>
-						<input type="hidden" name="action" value="subscribe_to_newsletter">
-						<?php wp_nonce_field( 'subscribe_to_newsletter', 'subscribe_to_newsletter_nonce' ); ?>
-					</form>
-					<div class="section-subscribe__decoration" style="background-image: url('<?php echo wp_get_attachment_image_url( 62, 'full' ); ?>');"></div>
-				</div>
-			</section>
+							<div class="subscribe-form__success" data-js-subscribe-form-global-message></div>
+							<input type="hidden" name="action" value="subscribe_to_newsletter">
+							<?php wp_nonce_field( 'subscribe_to_newsletter', 'subscribe_to_newsletter_nonce' ); ?>
+						</form>
+						<?php if ( ! empty( $subscribe_form['image'] ) ) : ?>
+							<div class="section-subscribe__decoration" style="background-image: url('<?php echo esc_url( wp_get_attachment_image_url( $subscribe_form['image'], 'full' ) ); ?>');"></div>
+						<?php endif; ?>
+					</div>
+				</section>
+			<?php endif; ?>
 			<?php
 			$infinite_carousel = $about_bechstein_hall_block['infinite_carousel'];
 
