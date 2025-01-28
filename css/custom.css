@@ -102,6 +102,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-shrink: 0;
+	cursor: pointer;
 }
 
 .bech-checkbox__control:hover,
@@ -271,6 +272,11 @@
 .section-subscribe__form .bech-checkbox__control,
 .section-subscribe__form .bech-field__control {
 	border-color: #fff;
+}
+
+.section-subscribe__form .bech-checkbox__control[aria-invalid='true'],
+.section-subscribe__form .bech-field__control[aria-invalid='true'] {
+	border-color: red;
 }
 
 .section-subscribe__form .bech-checkbox__control:checked {
