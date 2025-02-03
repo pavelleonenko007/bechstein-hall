@@ -2,7 +2,7 @@
 global $post;
 
 $ticket = !empty($args['ticket']) ? get_post($args['ticket']) : $post;
-$ticket_start_date_unix = strtotime(get_post_meta($ticket->ID, '_bechtix_ticket_start_date', true));
+$ticket_start_date_unix = strtotime(bech_get_ticket_date_field('_bechtix_ticket_start_date', $ticket->ID));
 $sale_status = get_post_meta($ticket->ID, '_bechtix_sale_status', true);
 $purchase_urls = bech_get_purchase_urls($ticket->ID);
 

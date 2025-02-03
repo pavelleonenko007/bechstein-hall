@@ -446,7 +446,7 @@ function bech_sort_tickets( array $tickets ): array {
 	$sorted_tickets = array();
 
 	foreach ( $tickets as $ticket ) {
-		$date_time                             = new DateTime( get_post_meta( $ticket->ID, '_bechtix_ticket_start_date', true ) );
+		$date_time                             = new DateTime( bech_get_ticket_date_field( '_bechtix_ticket_start_date', $ticket->ID ) );
 		$ticket_date                           = $date_time->format( 'Y-m-d' );
 		$ticket_date_unix                      = strtotime( $ticket_date );
 		$sorted_tickets[ $ticket_date_unix ][] = $ticket;
@@ -478,10 +478,26 @@ function bech_get_ticket_from_to_price( $post_id ) {
 		return "from £{$from_price} to £{$to_price}";
 	}
 }
+/**
+ * @param string      $field_key
+ * @param int|WP_Post $ticket
+ */
+function bech_get_ticket_date_field( string $field_key, $ticket ): string {
+	$field_date_string = get_field( $field_key, $ticket );
+
+	if ( empty( $field_date_string ) ) {
+		return '';
+	}
+
+	$date = new DateTime( get_field( $field_key, $ticket ), new DateTimeZone( 'UTC' ) );
+	$date->setTimezone( new DateTimeZone( get_option( 'timezone_string' ) ) );
+
+	return $date->format( 'Y-m-d H:i:s' );
+}
 
 function bech_get_ticket_times( $post_id ): string {
-	$start_date = new DateTime( get_field( '_bechtix_ticket_start_date', $post_id ) );
-	$end_date   = new DateTime( get_field( '_bechtix_ticket_end_date', $post_id ) );
+	$start_date = new DateTime( bech_get_ticket_date_field( '_bechtix_ticket_start_date', $post_id ) );
+	$end_date   = new DateTime( bech_get_ticket_date_field( '_bechtix_ticket_end_date', $post_id ) );
 	$start_time = $start_date->format( 'H:i' );
 	$end_time   = $end_date->format( 'H:i' );
 
@@ -1024,18 +1040,18 @@ function bech_get_homepage_slider_items() {
 }
 
 function bech_get_format_date_for_whats_on_slide( $post_id ) {
-	$start_date = strtotime( get_post_meta( $post_id, '_bechtix_ticket_start_date', true ) );
-	$end_date   = strtotime( get_post_meta( $post_id, '_bechtix_ticket_end_date', true ) );
-	$long_date  = date( 'j F', $start_date );
-	$time       = ', ' . date( 'H:i', $start_date ) . '—' . date( 'H:i', $end_date );
+	$start_date = strtotime( bech_get_ticket_date_field( '_bechtix_ticket_start_date', $post_id ) );
+	$end_date   = strtotime( bech_get_ticket_date_field( '_bechtix_ticket_end_date', $post_id ) );
+	$long_date  = gmdate( 'j F', $start_date );
+	$time       = ', ' . gmdate( 'H:i', $start_date ) . '—' . gmdate( 'H:i', $end_date );
 
 	return $long_date . $time;
 }
 
 function bech_get_ticket_event_data_for_calendar( $ticket ) {
-	$start_date_unix = strtotime( get_post_meta( $ticket->ID, '_bechtix_ticket_start_date', true ) );
-	$end_date_unix   = strtotime( get_post_meta( $ticket->ID, '_bechtix_ticket_end_date', true ) );
-	return _wp_specialchars(
+	$start_date_unix = strtotime( bech_get_ticket_date_field( '_bechtix_ticket_start_date', $ticket->ID ) );
+	$end_date_unix   = strtotime( bech_get_ticket_date_field( '_bechtix_ticket_end_date', $ticket->ID ) );
+	return esc_attr(
 		wp_json_encode(
 			array(
 				'name'         => $ticket->post_title,
@@ -1048,10 +1064,7 @@ function bech_get_ticket_event_data_for_calendar( $ticket ) {
 				'location'     => 'Bechstein Hall',
 				'iCalFileName' => $ticket->post_title,
 			)
-		),
-		ENT_QUOTES,
-		'UTF-8',
-		true
+		)
 	);
 }
 
@@ -1060,7 +1073,7 @@ function bech_get_purchase_urls( $ticket_id ) {
 }
 
 function bech_get_purchase_urls_attribute( $ticket_id ) {
-	return _wp_specialchars( get_post_meta( $ticket_id, '_bechtix_purchase_urls', true ), ENT_QUOTES, 'UTF-8', true );
+	return esc_attr( get_post_meta( $ticket_id, '_bechtix_purchase_urls', true ) );
 }
 
 function bech_get_sale_status_string_value( $sale_status ) {

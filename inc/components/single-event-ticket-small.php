@@ -2,7 +2,7 @@
 global $post;
 
 $ticket = !empty($args['ticket']) ? get_post($args['ticket']) : $post;
-$ticket_start_date_unix = strtotime(get_post_meta($ticket->ID, '_bechtix_ticket_start_date', true));
+$ticket_start_date_unix = strtotime(bech_get_ticket_date_field('_bechtix_ticket_start_date', $ticket->ID));
 $sale_status = get_post_meta($ticket->ID, '_bechtix_sale_status', true);
 $purchase_urls = bech_get_purchase_urls($ticket->ID);
 
@@ -12,8 +12,8 @@ $is_in_waiting_list = (bool) get_post_meta($ticket->ID, '_bechtix_in_waiting_lis
 
 <div class="events-ticket">
   <div class="events-ticket_left">
-    <div class="p-17-25 top-ticket _2"><?php echo date('l', $ticket_start_date_unix); ?></div>
-    <div class="p-20-30 w20 m30"><?php echo date('d F', $ticket_start_date_unix); ?></div>
+    <div class="p-17-25 top-ticket _2"><?php echo gmdate('l', $ticket_start_date_unix); ?></div>
+    <div class="p-20-30 w20 m30"><?php echo gmdate('d F', $ticket_start_date_unix); ?></div>
     <div class="p-20-30 w20"><?php echo bech_get_ticket_times($ticket->ID); ?></div>
   </div>
   <div class="events-ticket_right<?php echo $can_buy_ticket ? '' : ' events-ticket_right--disabled'; ?>">

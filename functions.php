@@ -6,6 +6,8 @@ define('PRIVACY_POLICY_PAGE_ID', 643);
 define('TERMS_OF_USE_PAGE_ID', 1113);
 define('NO_EVENTS_TEXT', 'We are having a rest! See you again soon.');
 
+update_option('timezone_string', 'Europe/London');
+
 $theme_version = '1657717607';
 
 add_action('init', 'get_theme_path');
