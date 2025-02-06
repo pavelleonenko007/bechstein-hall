@@ -1386,18 +1386,17 @@ function bech_default_og_image( $image ) {
 	}
 }
 
-	// set the default share image
-	add_action( 'wpseo_twitter_image', 'bech_default_share_image' );
-	add_action( 'wpseo_opengraph_image', 'bech_default_share_image' );
+// set the default share image
+add_action( 'wpseo_twitter_image', 'bech_default_share_image' );
+add_action( 'wpseo_opengraph_image', 'bech_default_share_image' );
 function bech_default_share_image( $image ) {
 	global $post;
 
-	$home_url = get_home_url();
-	if ( ! $image || $image === 'default' ) { // twitter will pass an empty string for $image while
+	if ( ! $image || 'default' === $image ) {
 		if ( is_singular( 'events' ) && ! empty( get_field( 'main_image', $post ) ) ) {
 			$image = wp_get_attachment_image_url( get_field( 'main_image', $post ), 'medium' );
 		} else {
-			$image = "{$home_url}/wp-content/uploads/og_main.png";
+			$image = esc_url( get_template_directory_uri() . '/images/ogmeta.png' );
 		}
 	}
 
