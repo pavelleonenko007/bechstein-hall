@@ -23,7 +23,7 @@ function bech_add_scripts(): void {
 	wp_enqueue_script( 'front', get_template_directory_uri() . '/js/front.js', array( 'main' ), false, true );
 	wp_enqueue_script( 'splide', '//cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js', array( 'front' ), false, true );
 	wp_enqueue_script( 'gsap', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js', array( 'front' ), false, true );
-	wp_enqueue_script( 'tween-max', '//thevogne.ru/wp-content/themes/twentyfifteen/js/TweenMax.min.js', array( 'front' ), false, true );
+	wp_enqueue_script( 'tween-max', get_template_directory_uri() . '/js/TweenMax.min.js', array( 'front' ), false, true );
 	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'front' ), false, true );
 	wp_enqueue_script( 'script-cus', get_template_directory_uri() .'/js/script-cus.js', array( 'custom' ), false, true );
 	wp_localize_script(

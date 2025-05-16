@@ -7,11 +7,11 @@ Template name: History
 <!-- This site was created in Webflow. https://www.webflow.com -->
 <!-- Last Published: Wed Oct 05 2022 12:09:23 GMT+0000 (Coordinated Universal Time) -->
 <html <?php language_attributes(); ?> data-wf-page="62ff4833c7c585b5564f9174" data-wf-site="624c5364ec3046603b0a108f">
-<?php get_template_part("header_block", ""); ?>
+<?php get_template_part( 'header_block', '' ); ?>
 
-<body <?php body_class("body history-page ready-hist"); ?>>
+<body <?php body_class( 'body history-page ready-hist' ); ?>>
 	<?php wp_body_open(); ?>
-	<?php get_template_part('inc/components/loader'); ?>
+	<?php get_template_part( 'inc/components/loader' ); ?>
 	<div class="page-wrapper">
 		<?php get_header(); ?>
 		<main class="wrapper hirory-page">
@@ -28,19 +28,19 @@ Template name: History
 					<div data-w-id="709b1c3b-8026-956a-adfc-ef232fca1cec" class="div-block-4"></div>
 					<div class="images-liner">
 						<div data-w-id="7922631e-f617-13a2-690f-9233e32ce457" class="images-line">
-							<div class="image-his-item _1m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a0fdf77a4376107f95_img-min.jpg" loading="lazy" alt class="image-cards"></div>
-							<div class="image-his-item _2m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a008f8f4440e5e0778_img-1-min.jpg" loading="lazy" alt class="image-cards"></div>
-							<div class="image-his-item _3m"><img src="<?php echo get_template_directory_uri() ?>/images/626956a04cfca040db185764_img-2-min.jpg" loading="lazy" alt class="image-cards"></div>
+							<div class="image-his-item _1m"><img src="<?php echo get_template_directory_uri(); ?>/images/626956a0fdf77a4376107f95_img-min.jpg" loading="lazy" alt class="image-cards"></div>
+							<div class="image-his-item _2m"><img src="<?php echo get_template_directory_uri(); ?>/images/626956a008f8f4440e5e0778_img-1-min.jpg" loading="lazy" alt class="image-cards"></div>
+							<div class="image-his-item _3m"><img src="<?php echo get_template_directory_uri(); ?>/images/626956a04cfca040db185764_img-2-min.jpg" loading="lazy" alt class="image-cards"></div>
 							<div class="image-his-item _4m" style="border-radius: 10rem; overflow: hidden;">
-								<img src="<?php echo get_template_directory_uri() ?>/images/Brinsmead-Concert-Hall.jpg" loading="lazy" alt class="image-cards"></div>
+								<img src="<?php echo get_template_directory_uri(); ?>/images/Brinsmead-Concert-Hall.jpg" loading="lazy" alt class="image-cards"></div>
 						</div>
 						<div class="splide hist-page">
 							<div class="splide__track">
 								<div class="splide__list">
-									<div class="splide__slide"><img src="<?php echo get_template_directory_uri() ?>/images/626956a008f8f4440e5e0778_img-1-min.jpg" loading="eager" alt class="image-4"></div>
-									<div class="splide__slide"><img src="<?php echo get_template_directory_uri() ?>/images/626956a04cfca040db185764_img-2-min.jpg" loading="eager" alt class="image-4"></div>
-									<div class="splide__slide"><img src="<?php echo get_template_directory_uri() ?>/images/626956a0fdf77a4376107f95_img-min.jpg" loading="eager" alt class="image-4"></div>
-									<div class="splide__slide"><img src="<?php echo get_template_directory_uri() ?>/images/Brinsmead-Concert-Hall.jpg" loading="eager" alt class="image-4"></div>
+									<div class="splide__slide"><img src="<?php echo get_template_directory_uri(); ?>/images/626956a008f8f4440e5e0778_img-1-min.jpg" loading="eager" alt class="image-4"></div>
+									<div class="splide__slide"><img src="<?php echo get_template_directory_uri(); ?>/images/626956a04cfca040db185764_img-2-min.jpg" loading="eager" alt class="image-4"></div>
+									<div class="splide__slide"><img src="<?php echo get_template_directory_uri(); ?>/images/626956a0fdf77a4376107f95_img-min.jpg" loading="eager" alt class="image-4"></div>
+									<div class="splide__slide"><img src="<?php echo get_template_directory_uri(); ?>/images/Brinsmead-Concert-Hall.jpg" loading="eager" alt class="image-4"></div>
 								</div>
 							</div>
 						</div>
@@ -55,7 +55,7 @@ Template name: History
 						<div class="his-container lft">
 							<div class="his-left lft m1">
 								<div class="year-big-counter strk viz-mob">1836</div>
-								<div class="his-left-imagemom er"><img src="<?php echo get_template_directory_uri() ?>/images/62fbac15da6d955c3df26693_Rectangle2026.png" loading="lazy" data-w-id="9f05344b-77d0-a352-93b6-a1cd30f64b07" alt class="img-cover"></div>
+								<div class="his-left-imagemom er"><img src="<?php echo get_template_directory_uri(); ?>/images/62fbac15da6d955c3df26693_Rectangle2026.png" loading="lazy" data-w-id="9f05344b-77d0-a352-93b6-a1cd30f64b07" alt class="img-cover"></div>
 							</div>
 							<div class="his-right m691">
 								<p data-w-id="9f05344b-77d0-a352-93b6-a1cd30f64b0b" class="p-20-35">18-22 Wigmore Street as we see it today was redeveloped in 1892 by Holloway Brothers to designs by the architect Leonard Hunt, specifically to meet the needs of the flourishing Brinsmead company. Formerly a shepherd and carpenter, John Brinsmead had established his piano company as early as 1836, originally in Charlotte Street.<br></p>
@@ -203,7 +203,7 @@ Template name: History
 			window.onresize = reportWindowSize;
 		});
 	</script>
-	<script type="text/javascript" src="//thevogne.ru/bech/script-cus.js?ver=6.0.1" id="script-cus-js"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri() . '/js/script-cus.js?ver=6.0.1'; ?>" id="script-cus-js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 	<script>
 		$(document).ready(function() {
@@ -246,4 +246,4 @@ Template name: History
 			sldes();
 		});
 	</script>
-	<?php get_template_part("footer_block", ""); ?>
+	<?php get_template_part( 'footer_block', '' ); ?>

@@ -107,7 +107,7 @@ input {
   position: absolute;
   left: calc(100% + 10px);
   bottom: calc(100% + 10px);
-  background-image: url(https://bechsteinhall.func.agency/wp-content/uploads/Group-17.svg);
+  background-image: url(https://bechsteinhall.com/wp-content/uploads/Group-17.svg);
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
@@ -326,7 +326,7 @@ html .wo-slide img {
 }
 
 .w-lightbox-close {
-  background-image: url(https://bechsteinhall.func.agency/wp-content/uploads/Group-17.svg);
+  background-image: url(https://bechsteinhall.com/wp-content/uploads/Group-17.svg);
 }
 
 .p-17-25.mar20 ul,
@@ -468,12 +468,12 @@ html .clearfilter-btn {
 
 .booktickets-btn.priority:after,
 .booktickets-btn.priority:before {
-  background: url(https://bechsteinhall.func.agency/wp-content/uploads/dsffSubtract.svg);
+  background: url(https://bechsteinhall.com/wp-content/uploads/dsffSubtract.svg);
 }
 
 .booktickets-btn.priority:hover:after,
 .booktickets-btn.priority:hover:before {
-  background: url(https://bechsteinhall.func.agency/wp-content/uploads/asdSubtract.svg);
+  background: url(https://bechsteinhall.com/wp-content/uploads/asdSubtract.svg);
 }
 
 .no-event-message {
