@@ -8,7 +8,7 @@ add_theme_support( 'widgets' );
 add_action( 'wp_enqueue_scripts', 'bech_add_scripts' );
 function bech_add_scripts(): void {
 	wp_enqueue_style( 'custom', get_template_directory_uri() . '/css/custom.css', array( 'main' ), rand() );
-	wp_enqueue_style( 'style-css', '//thevogne.ru/bech/style-cus.css', array( 'custom' ), rand() );
+	wp_enqueue_style( 'style-css', get_template_directory_uri() . '/css/style-cus.css', array( 'custom' ), rand() );
 
 	/**
 	 * script for IE 9
@@ -25,7 +25,7 @@ function bech_add_scripts(): void {
 	wp_enqueue_script( 'gsap', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js', array( 'front' ), false, true );
 	wp_enqueue_script( 'tween-max', '//thevogne.ru/wp-content/themes/twentyfifteen/js/TweenMax.min.js', array( 'front' ), false, true );
 	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'front' ), false, true );
-	wp_enqueue_script( 'script-cus', '//thevogne.ru/bech/script-cus.js', array( 'custom' ), false, true );
+	wp_enqueue_script( 'script-cus', get_template_directory_uri() .'/js/script-cus.js', array( 'custom' ), false, true );
 	wp_localize_script(
 		'custom',
 		'bech_var',
